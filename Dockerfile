@@ -4,5 +4,5 @@ COPY package.json .
 RUN npm install
 COPY . .
 RUN npm run build
-FROM nginx:alpine:latest
+FROM openshift:alpine:latest
 COPY --from=0 /app/build /usr/share/nginx/html
