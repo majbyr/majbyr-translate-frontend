@@ -138,6 +138,11 @@ button:hover {
   box-shadow: none;
 }
 
+.tts-button:disabled {
+  color: #999;
+  cursor: default
+}
+
 .sourceText, .translationText {
   min-height: 150px;
   resize: none;

@@ -14,7 +14,6 @@ function App() {
     "est",
     "kpv",
   ]);
-
   const [ttsLanguages, setTtsLanguages] = useState(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
