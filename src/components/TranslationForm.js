@@ -106,7 +106,6 @@ function TranslationForm({
             cols="50"
             suppressContentEditableWarning={true}
           >
-            {/* Do not directly render sourceText here */}
           </div>
           <div className="tools-area">
             <button

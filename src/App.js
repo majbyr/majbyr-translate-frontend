@@ -23,6 +23,12 @@ function App() {
   }, []);
 
   const handleTranslation = async (text, src, tgt) => {
+    if (text === "") {
+      setTranslation("");
+      setTranslationVariants([]);
+      return;
+    }
+    
     try {
       const response = await fetch(
         "https://api-majbyr-translate.rahtiapp.fi/translate/",
