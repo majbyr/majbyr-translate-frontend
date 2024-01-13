@@ -1,5 +1,4 @@
 /* src/App.css */
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -178,4 +177,8 @@ button:hover {
 
 .sourceText, .translationText {
   flex-grow: 1; /* This allows the text area to grow and fill the space */
+}
+
+body {
+  overflow: hidden;
 }

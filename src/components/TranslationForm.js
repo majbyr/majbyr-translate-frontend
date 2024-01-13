@@ -33,7 +33,7 @@ function TranslationForm({
         timerId = setTimeout(() => {
           setSourceText(inputRef.current.textContent);
           onTranslate(inputRef.current.textContent, sourceLang, targetLang);
-        }, 1000); // set a new timer to run the translation 1 second after the user stops typing
+        }, 500); // set a new timer to run the translation 1 second after the user stops typing
       }
     };
   
