@@ -100,7 +100,7 @@ function TranslationForm({
           <div
             className="sourceText"
             ref={inputRef}
-            contentEditable
+            contentEditable="plaintext-only"
             placeholder="Enter text"
             rows="10"
             cols="50"

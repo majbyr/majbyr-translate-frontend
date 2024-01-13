@@ -52,7 +52,6 @@ textarea, .translation, .input-area, .translation-area {
   width: calc(50% - 10px);
   border: 1px solid #ddd;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  
 }
 
 .translation {
