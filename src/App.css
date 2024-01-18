@@ -175,6 +175,16 @@ button:hover {
   flex-direction: row;
 }
 
+@media (max-width: 768px) {
+  .text-areas {
+    flex-direction: column;
+    align-items: center;
+  }
+  .input-area, .translation-area {
+    width: 100%;
+  }
+}
+
 .input-area, .translation-area {
   display: flex;
   flex-direction: column;
