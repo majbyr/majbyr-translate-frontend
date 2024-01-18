@@ -21,37 +21,6 @@ function App() {
     getTtsLanguages();
   }, []);
 
-  // const handleTranslation = async (text, src, tgt) => {
-  //   if (text === "") {
-  //     setTranslation("");
-  //     setTranslationVariants([]);
-  //     return;
-  //   }
-    
-  //   try {
-  //     const response = await fetch(
-  //       "https://api-majbyr-translate.rahtiapp.fi/translate/",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           text,
-  //           src,
-  //           tgt,
-  //         }),
-  //       }
-  //     );
-  //     const data = await response.json();
-  //     setTranslation(data.result);
-  //     setTranslationVariants(data.alternatives);
-  //   } catch (error) {
-  //     console.error("Error translating text:", error);
-  //     setTranslation("Failed to translate text.");
-  //   }
-  // };
-
   const handleComplexTranslation = async (text, src, tgt) => {
     try {
       const response = await fetch(
@@ -70,10 +39,8 @@ function App() {
       );
       const data = await response.json();
       setTranslatedSentences(data.translations);
-      console.log(data.translations);
     } catch (error) {
-      console.error("Error translating text:", error);
-      setTranslatedSentences(["Failed to translate text."]);
+      setTranslatedSentences([["Failed to translate text."]]);
     }
   }
 

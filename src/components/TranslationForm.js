@@ -65,10 +65,8 @@ function TranslationForm({
     const temp = sourceLang;
     setSourceLang(targetLang);
     setTargetLang(temp);
-    inputRef.current.textContent = translatedSentences
-      .map((sentence, index) => sentence[0])
-      .join(" ");
-    onTranslate(sourceText, targetLang, sourceLang);
+    inputRef.current.textContent = document.getElementsByClassName("translationText")[0].innerText
+    setSourceText(inputRef.current.textContent)
   };
 
   const handleSubmit = (event) => {
