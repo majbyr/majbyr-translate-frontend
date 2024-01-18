@@ -5,8 +5,7 @@ import TranslationForm from "./components/TranslationForm";
 import "./App.css";
 
 function App() {
-  const [translation, setTranslation] = useState("");
-  const [translationVariants, setTranslationVariants] = useState([]);
+  const [translatedSentences, setTranslatedSentences] = useState([]);
   const [languages, setLanguages] = useState([
     "eng",
     "fin",
@@ -22,16 +21,41 @@ function App() {
     getTtsLanguages();
   }, []);
 
-  const handleTranslation = async (text, src, tgt) => {
-    if (text === "") {
-      setTranslation("");
-      setTranslationVariants([]);
-      return;
-    }
+  // const handleTranslation = async (text, src, tgt) => {
+  //   if (text === "") {
+  //     setTranslation("");
+  //     setTranslationVariants([]);
+  //     return;
+  //   }
     
+  //   try {
+  //     const response = await fetch(
+  //       "https://api-majbyr-translate.rahtiapp.fi/translate/",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           text,
+  //           src,
+  //           tgt,
+  //         }),
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     setTranslation(data.result);
+  //     setTranslationVariants(data.alternatives);
+  //   } catch (error) {
+  //     console.error("Error translating text:", error);
+  //     setTranslation("Failed to translate text.");
+  //   }
+  // };
+
+  const handleComplexTranslation = async (text, src, tgt) => {
     try {
       const response = await fetch(
-        "https://api-majbyr-translate.rahtiapp.fi/translate/",
+        "https://api-majbyr-translate.rahtiapp.fi/translate_complex/",
         {
           method: "POST",
           headers: {
@@ -45,13 +69,13 @@ function App() {
         }
       );
       const data = await response.json();
-      setTranslation(data.result);
-      setTranslationVariants(data.alternatives);
+      setTranslatedSentences(data.translations);
+      console.log(data.translations);
     } catch (error) {
       console.error("Error translating text:", error);
-      setTranslation("Failed to translate text.");
+      setTranslatedSentences(["Failed to translate text."]);
     }
-  };
+  }
 
   const handleTts = async (text, lang, setIsAudioPlaying) => {
     try {
@@ -112,12 +136,11 @@ function App() {
     <div className="App">
       <h1>Majbyr translate</h1>
       <TranslationForm
-        onTranslate={handleTranslation}
+        onTranslate={handleComplexTranslation}
         onTts={(text, lang) => handleTts(text, lang, setIsAudioPlaying)}
         languages={languages}
         ttsLanguages={ttsLanguages}
-        translation={translation}
-        translationVariants={translationVariants}
+        translatedSentences={translatedSentences}
         isAudioPlaying={isAudioPlaying}
         setIsAudioPlaying={setIsAudioPlaying}
       />

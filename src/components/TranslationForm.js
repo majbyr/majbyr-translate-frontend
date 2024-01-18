@@ -9,37 +9,36 @@ function TranslationForm({
   onTts,
   languages,
   ttsLanguages,
-  translation,
-  translationVariants,
+  translatedSentences,
   isAudioPlaying,
   setIsAudioPlaying,
 }) {
   const [sourceText, setSourceText] = useState("");
   const [sourceLang, setSourceLang] = useState("kpv");
   const [targetLang, setTargetLang] = useState("eng");
-  const [showVariantsFlag, setShowVariantsFlag] = useState(false);
+  const [selectedSentence, setSelectedSentence] = useState(null);
 
   const inputRef = useRef(null);
 
   useEffect(() => {
     let timerId = null;
-  
+
     const handleInput = () => {
       if (inputRef.current) {
         if (timerId) {
           clearTimeout(timerId); // clear the previous timer if it exists
         }
-  
+
         timerId = setTimeout(() => {
           setSourceText(inputRef.current.textContent);
           onTranslate(inputRef.current.textContent, sourceLang, targetLang);
         }, 500); // set a new timer to run the translation 1 second after the user stops typing
       }
     };
-  
+
     const div = inputRef.current;
     div.addEventListener("input", handleInput);
-  
+
     return () => {
       div.removeEventListener("input", handleInput);
       if (timerId) {
@@ -48,22 +47,50 @@ function TranslationForm({
     };
   }, [sourceLang, targetLang, onTranslate]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.classList.contains("translatedSentence")) {
+        setSelectedSentence(null);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   const swapLanguages = () => {
     const temp = sourceLang;
     setSourceLang(targetLang);
     setTargetLang(temp);
-    inputRef.current.textContent = translation;
+    inputRef.current.textContent = translatedSentences
+      .map((sentence, index) => sentence[0])
+      .join(" ");
     onTranslate(sourceText, targetLang, sourceLang);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onTranslate(sourceText, sourceLang, targetLang);
-    setShowVariantsFlag(false); // Reset the show variants flag on a new translation
+    //setShowVariantsFlag(false); // Reset the show variants flag on a new translation
   };
 
-  const toggleVariants = () => {
-    setShowVariantsFlag(!showVariantsFlag);
+  const toggleVariants = (sentence, paragraphIndex, sentenceIndex) => () => {
+    if (
+      selectedSentence &&
+      selectedSentence.paragraphIndex === paragraphIndex &&
+      selectedSentence.sentenceIndex === sentenceIndex
+    ) {
+      setSelectedSentence(null);
+    } else {
+      setSelectedSentence({
+        paragraphIndex,
+        sentenceIndex,
+        sentence: sentence.slice(1),
+      });
+    }
   };
 
   return (
@@ -72,8 +99,9 @@ function TranslationForm({
         <select
           value={sourceLang}
           onChange={(e) => {
-            setSourceLang(e.target.value)
-            onTranslate(sourceText, e.target.value, targetLang)}}
+            setSourceLang(e.target.value);
+            onTranslate(sourceText, e.target.value, targetLang);
+          }}
         >
           {languages.map((lang) => (
             <option key={lang} value={lang}>
@@ -81,12 +109,15 @@ function TranslationForm({
             </option>
           ))}
         </select>
-        <button className="tts-button" onClick={swapLanguages}><FaArrowRightArrowLeft/></button>
+        <button className="tts-button" onClick={swapLanguages}>
+          <FaArrowRightArrowLeft />
+        </button>
         <select
           value={targetLang}
           onChange={(e) => {
-            setTargetLang(e.target.value)
-            onTranslate(sourceText, sourceLang, e.target.value)}}
+            setTargetLang(e.target.value);
+            onTranslate(sourceText, sourceLang, e.target.value);
+          }}
         >
           {languages.map((lang) => (
             <option key={lang} value={lang}>
@@ -105,8 +136,7 @@ function TranslationForm({
             rows="10"
             cols="50"
             suppressContentEditableWarning={true}
-          >
-          </div>
+          ></div>
           <div className="tools-area">
             <button
               className="tts-button"
@@ -119,24 +149,45 @@ function TranslationForm({
         </div>
         <div className="translation-area">
           <div className="translationText">
-            <span className="translatedSentence" onClick={toggleVariants}>
-              {translation}
-            </span>
-            {showVariantsFlag && (
-            <div className="translation-variants">
-              {translationVariants.map((variant, index) => (
-                <div className="variant" key={index}>
-                  {variant}
-                </div>
-              ))}
-            </div>
-          )}
+            {translatedSentences.map((paragraph, paragraphIndex) => (
+              <div key={paragraphIndex}>
+                {paragraph.map((sentence, sentenceIndex) => (
+                  <React.Fragment key={sentenceIndex}>
+                    <span
+                      className="translatedSentence"
+                      onClick={toggleVariants(
+                        sentence,
+                        paragraphIndex,
+                        sentenceIndex
+                      )}
+                    >
+                      {sentence[0]}
+                    </span>{" "}
+                    {selectedSentence &&
+                      selectedSentence.paragraphIndex === paragraphIndex &&
+                      selectedSentence.sentenceIndex === sentenceIndex && (
+                        <div className="translation-variants">
+                          {selectedSentence.sentence.map((variant, index) => (
+                            <div className="variant" key={index}>
+                              {variant}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                  </React.Fragment>
+                ))}
+              </div>
+            ))}
           </div>
           <div className="tools-area">
             <button
               className="tts-button"
-              disabled={!translation || !ttsLanguages.includes(targetLang)}
-              onClick={() => onTts(translation, targetLang, setIsAudioPlaying)}
+              disabled={
+                !translatedSentences[0] || !ttsLanguages.includes(targetLang)
+              }
+              onClick={() =>                
+                onTts(document.getElementsByClassName("translationText")[0].innerText, targetLang, setIsAudioPlaying)
+              }
             >
               {isAudioPlaying ? <FaStop /> : <FaVolumeLow />}
             </button>
