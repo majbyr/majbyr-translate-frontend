@@ -22,7 +22,6 @@ function ToolsArea({
                 setAudio(null);
                 return;
             }
-
             const a = await onTts(text, lang);
             a.onended = () => (setAudio(null));
             setAudio(a);
