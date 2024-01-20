@@ -26,7 +26,7 @@ function TranslationForm({
     const handleInput = () => {
       clearTimeout(timerId);
       timerId = setTimeout(() => {
-        const inputText = inputRef.current.textContent;
+        const inputText = inputRef.current.innerText;
         setSourceText(inputText);
         onTranslate(inputText, sourceLang, targetLang);
       }, 500);
@@ -48,7 +48,8 @@ function TranslationForm({
     setTargetLang(sourceLang);
     const newSourceText = document.getElementsByClassName("translationText")[0].innerText;
     setSourceText(newSourceText);
-    inputRef.current.textContent = newSourceText;
+    inputRef.current.innerText = newSourceText;
+    onTranslate(newSourceText, targetLang, sourceLang);
   };
 
   const handleSelectChange = (setter, isSourceLang) => (e) => {
