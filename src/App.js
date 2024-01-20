@@ -22,6 +22,10 @@ function App() {
   }, []);
 
   const handleComplexTranslation = async (text, src, tgt) => {
+    if (text.trim() === "") {
+      setTranslatedSentences([]);
+      return;
+    }
     try {
       const response = await fetch(
         "https://api-majbyr-translate.rahtiapp.fi/translate_complex/",
@@ -40,19 +44,23 @@ function App() {
       const data = await response.json();
       setTranslatedSentences(data.translations);
     } catch (error) {
-      setTranslatedSentences([["Failed to translate text."]]);
+      setTranslatedSentences([[["Failed to translate text."]]]);
     }
   }
 
   const handleTts = async (text, lang, setIsAudioPlaying) => {
+    if (text.trim() === "") {
+      return;
+    }
     try {
       // Construct the URL with query parameters
       const url = new URL("https://api-majbyr-translate.rahtiapp.fi/tts/");
       url.searchParams.append("text", text);
       url.searchParams.append("lang", lang);
-
+      setIsAudioPlaying(true);
       const response = await fetch(url);
       if (!response.ok) {
+        setIsAudioPlaying(false);
         throw new Error("Response from TTS service was not okay");
       }
 
@@ -62,12 +70,12 @@ function App() {
 
       // Create a new HTMLAudioElement and play the audio
       const audio = new Audio(audioUrl);
-      setIsAudioPlaying(true);
 
       audio.onended = () => {
         setIsAudioPlaying(false);
       };
       audio.play();
+      return audio;
     } catch (error) {
       console.error("Error in text-to-speech:", error);
       setIsAudioPlaying(false);
