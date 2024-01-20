@@ -8,6 +8,7 @@ function ToolsArea({
   lang,
   onTts,
   ttsLanguages,
+  inTranslation,
 }) {
     const isTtsDisabled = ttsLanguages === null || !ttsLanguages.includes(lang) || text.trim() === "";
     const [audio, setAudio] = useState(null);
@@ -22,6 +23,10 @@ function ToolsArea({
                 setAudio(null);
                 return;
             }
+            if (inTranslation) {
+              text = document.querySelector(".translationText").innerText;
+            }
+
             const a = await onTts(text, lang);
             a.onended = () => (setAudio(null));
             setAudio(a);

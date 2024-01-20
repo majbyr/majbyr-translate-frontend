@@ -37,6 +37,7 @@ function TranslationArea({
         setIsAudioPlaying={setIsAudioPlaying}
         isTtsDisabled={isTtsDisabled}
         ttsLanguages={ttsLanguages}
+        inTranslation={true}
       />
     </div>
   );
