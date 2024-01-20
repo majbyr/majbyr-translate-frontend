@@ -179,16 +179,6 @@ button:hover {
   flex-direction: row;
 }
 
-@media (max-width: 768px) {
-  .text-areas {
-    flex-direction: column;
-    align-items: center;
-  }
-  .input-area, .translation-area {
-    width: 100%;
-  }
-}
-
 .input-area, .translation-area {
   display: flex;
   flex-direction: column;
@@ -208,4 +198,106 @@ body {
 
 .selected {
   background-color: #ffe9e9;
+}
+
+@media (max-width: 768px) {
+
+  .App {
+    padding: 0px;
+  }
+
+  h1 {
+    margin-bottom: 0px;
+    font-size: large;
+    color: brown;
+    padding-bottom: 10px;
+
+  }
+
+  body {
+    background-color: #fff;
+  }
+
+  .translation-form {
+    margin: 0px;
+    padding: 0px;
+    border-radius: 0px;
+    box-shadow: none;
+  }
+
+  .language-selectors {
+    display: flex;
+    flex-direction: row;
+    padding: 0px; 
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: center;
+    border-bottom: 1px solid;
+    border-image: linear-gradient(to right, transparent 10%, #ddd 25%, #ddd 75%, transparent 90%) 100% 1;  
+    
+  }
+
+  .language-selectors select {
+    align-self: center;
+    font-size: large;   
+    padding: 0px; 
+    margin: 0px;
+    flex-grow: 1;
+    min-width: 0px;
+    color: #333;
+    background-color: #ffffff;
+    border: none;
+    padding-left: 20px;
+    justify-items: start;
+    }
+
+  .language-selectors select:focus {
+    outline: none;
+    background-color: #ffffff;
+    color: #333;
+  }
+
+  .text-areas {
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 0px;
+    font-size: x-large; 
+  }
+
+  .input-area, .translation-area {
+    width: 100%;
+    padding: 0px;
+    border: unset;
+  }
+
+  .input-area {
+    height: auto;
+  }
+
+  .translation-area {
+    height: auto;
+    border-bottom-left-radius: 30px; /* adjust as needed */
+    border-bottom-right-radius: 30px;
+  }
+
+  .sourceText {
+    min-height: auto;
+    caret-color: brown;
+    min-height: 5vh;
+  }
+
+  .tts-button, select {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tts-button:hover {
+    color: #333;
+    background-color: transparent;
+  }
+  
+  [contenteditable=plaintext-only]:empty:not(:focus):before{
+    content:attr(placeholder);
+    color:rgb(193, 179, 179);
+  }
+
 }

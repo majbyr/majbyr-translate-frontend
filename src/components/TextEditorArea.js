@@ -20,7 +20,7 @@ function TextEditorArea({
         className="sourceText"
         ref={inputRef}
         contentEditable="plaintext-only"
-        placeholder="Enter text"
+        placeholder="Enter the text"
         rows="10"
         cols="50"
         suppressContentEditableWarning={true}
