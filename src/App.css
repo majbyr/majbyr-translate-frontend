@@ -200,6 +200,11 @@ body {
   background-color: #ffe9e9;
 }
 
+[contenteditable=plaintext-only]:empty:before{
+  content:attr(placeholder);
+  color:rgb(193, 179, 179);
+}
+
 @media (max-width: 768px) {
 
   .App {
@@ -293,11 +298,6 @@ body {
   .tts-button:hover {
     color: #333;
     background-color: transparent;
-  }
-  
-  [contenteditable=plaintext-only]:empty:not(:focus):before{
-    content:attr(placeholder);
-    color:rgb(193, 179, 179);
   }
 
 }

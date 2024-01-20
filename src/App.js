@@ -1,24 +1,26 @@
 // src/App.js
 
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import TranslationForm from "./components/TranslationForm";
 import "./App.css";
 
 function App() {
   const [translatedSentences, setTranslatedSentences] = useState([]);
-  const [languages, setLanguages] = useState([
-    "eng",
-    "fin",
-    "rus",
-    "est",
-    "kpv",
-  ]);
+  const [languages, setLanguages] = useState(null);
   const [ttsLanguages, setTtsLanguages] = useState(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // New state for loading
 
   useEffect(() => {
-    getTranslationLanguages();
-    getTtsLanguages();
+    setIsLoading(true); // Start loading
+    const loadData = async () => {
+      await getTranslationLanguages();
+      await getTtsLanguages();
+      setIsLoading(false);
+    };
+    loadData();
   }, []);
 
   const handleComplexTranslation = async (text, src, tgt) => {
@@ -46,7 +48,7 @@ function App() {
     } catch (error) {
       setTranslatedSentences([[["Failed to translate text."]]]);
     }
-  }
+  };
 
   const handleTts = async (text, lang, setIsAudioPlaying) => {
     if (text.trim() === "") {
@@ -107,19 +109,46 @@ function App() {
     }
   };
 
+  if (isLoading) {
+    return;
+  }
+
   return (
-    <div className="App">
-      <h1>Majbyr translate</h1>
-      <TranslationForm
-        onTranslate={handleComplexTranslation}
-        onTts={(text, lang) => handleTts(text, lang, setIsAudioPlaying)}
-        languages={languages}
-        ttsLanguages={ttsLanguages}
-        translatedSentences={translatedSentences}
-        isAudioPlaying={isAudioPlaying}
-        setIsAudioPlaying={setIsAudioPlaying}
-      />
-    </div>
+    <Router>
+      <div className="App">
+        <h1>Majbyr translate</h1>
+        <Routes>
+          <Route
+            path="/:src/:tgt"
+            element={
+              <TranslationForm
+                onTranslate={handleComplexTranslation}
+                onTts={(text, lang) => handleTts(text, lang, setIsAudioPlaying)}
+                languages={languages}
+                ttsLanguages={ttsLanguages}
+                translatedSentences={translatedSentences}
+                isAudioPlaying={isAudioPlaying}
+                setIsAudioPlaying={setIsAudioPlaying}
+              />
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <TranslationForm
+                onTranslate={handleComplexTranslation}
+                onTts={(text, lang) => handleTts(text, lang, setIsAudioPlaying)}
+                languages={languages}
+                ttsLanguages={ttsLanguages}
+                translatedSentences={translatedSentences}
+                isAudioPlaying={isAudioPlaying}
+                setIsAudioPlaying={setIsAudioPlaying}
+              />
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

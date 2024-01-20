@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { iso6393 } from "iso-639-3";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import { useParams, useNavigate } from "react-router-dom";
 import TextEditorArea from "./TextEditorArea";
 import TranslationArea from "./TranslationArea";
 
@@ -16,9 +17,27 @@ function TranslationForm({
   setIsAudioPlaying,
 }) {
   const [sourceText, setSourceText] = useState("");
-  const [sourceLang, setSourceLang] = useState("kpv");
-  const [targetLang, setTargetLang] = useState("eng");
+  const { src, tgt } = useParams();
+  const [sourceLang, setSourceLang] = useState(src || "eng");
+  const [targetLang, setTargetLang] = useState(tgt || "kpv");
   const inputRef = useRef(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (src) {
+      setSourceLang(src);
+    }
+    if (tgt) {
+      setTargetLang(tgt);
+    }
+  }, [src, tgt]);
+
+
+  useEffect(() => {
+    navigate(`/${sourceLang}/${targetLang}`);
+  }, 
+  [sourceLang, targetLang, navigate]);
 
   useEffect(() => {
     let timerId;
@@ -41,12 +60,11 @@ function TranslationForm({
     };
   }, [sourceLang, targetLang, onTranslate]);
 
-  
-
   const swapLanguages = () => {
     setSourceLang(targetLang);
     setTargetLang(sourceLang);
-    const newSourceText = document.getElementsByClassName("translationText")[0].innerText;
+    const newSourceText =
+      document.getElementsByClassName("translationText")[0].innerText;
     setSourceText(newSourceText);
     inputRef.current.innerText = newSourceText;
     onTranslate(newSourceText, targetLang, sourceLang);
@@ -55,7 +73,7 @@ function TranslationForm({
   const handleSelectChange = (setter, isSourceLang) => (e) => {
     const newLang = e.target.value;
     setter(newLang);
-  
+
     if (isSourceLang) {
       onTranslate(sourceText, newLang, targetLang);
     } else {
@@ -73,14 +91,24 @@ function TranslationForm({
   return (
     <div className="translation-form">
       <div className="language-selectors">
-        <select value={sourceLang} onChange={handleSelectChange(setSourceLang, true)}>
-          {languages.map((lang) => <LanguageOption key={lang} lang={lang} />)}
+        <select
+          value={sourceLang}
+          onChange={handleSelectChange(setSourceLang, true)}
+        >
+          {languages.map((lang) => (
+            <LanguageOption key={lang} lang={lang} />
+          ))}
         </select>
         <button className="tts-button" onClick={swapLanguages}>
           <FaArrowRightArrowLeft />
         </button>
-        <select value={targetLang} onChange={handleSelectChange(setTargetLang, false)}>
-          {languages.map((lang) => <LanguageOption key={lang} lang={lang} />)}
+        <select
+          value={targetLang}
+          onChange={handleSelectChange(setTargetLang, false)}
+        >
+          {languages.map((lang) => (
+            <LanguageOption key={lang} lang={lang} />
+          ))}
         </select>
       </div>
       <div className="text-areas">
