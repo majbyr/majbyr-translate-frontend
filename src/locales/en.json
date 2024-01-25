@@ -1,0 +1,35 @@
+{
+    "translation": { 
+        "app": "Majbyr translate",
+        "Failed to translate": "Failed to translate",
+        "Enter text to translate": "Enter text to translate",
+
+        "kpv": "Komi (Zyrian)",
+        "mhr": "Mari (Meadow)",
+        "mrj": "Mari (Hill)",
+        "udm": "Udmurt",
+        "eng": "English",
+        "est": "Estonian",
+        "fin": "Finnish",
+        "rus": "Russian",
+        "hun": "Hungarian",
+        "kca": "Khanty",
+        "koi": "Komi (Permyak)",
+        "krl": "Karelian",
+        "myv": "Erzya",
+        "liv": "Livonian",
+        "lud": "Ludian",
+        "lvs": "Latvian",
+        "mdf": "Moksha",
+        "mns": "Mansi",
+        "nob": "Norwegian Bokmål",
+        "olo": "Livvi",
+        "sma": "Sami (Southern)",
+        "sme": "Sami (Northern)",
+        "smj": "Sami (Lule)",
+        "smn": "Sami (Inari)",
+        "sms": "Sami (Skolt)",
+        "vep": "Veps",
+        "vro": "Võro"
+    }
+}

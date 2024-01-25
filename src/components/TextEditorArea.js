@@ -2,6 +2,7 @@
 
 import React from "react";
 import ToolsArea from "./ToolsArea";
+import { useTranslation } from 'react-i18next';
 
 function TextEditorArea({
   inputRef,
@@ -12,13 +13,16 @@ function TextEditorArea({
   setIsAudioPlaying,
   ttsLanguages,
 }) {
+
+  const { t } = useTranslation();
+
   return (
     <div className="input-area">
       <div
         className="sourceText"
         ref={inputRef}
         contentEditable="plaintext-only"
-        placeholder="Enter the text"
+        placeholder={t("Enter text to translate")}
         suppressContentEditableWarning={true}
       ></div>
       <ToolsArea

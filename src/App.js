@@ -3,10 +3,18 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import { useTranslation } from 'react-i18next';
+
 import TranslationForm from "./components/TranslationForm";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 import "./App.css";
 
+import "./i18n";
+
 function App() {
+  
+  const { t } = useTranslation();
+
   const [translatedSentences, setTranslatedSentences] = useState([]);
   const [languages, setLanguages] = useState(null);
   const [ttsLanguages, setTtsLanguages] = useState(null);
@@ -14,7 +22,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true); // New state for loading
 
   useEffect(() => {
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     const loadData = async () => {
       await getTranslationLanguages();
       await getTtsLanguages();
@@ -46,7 +54,7 @@ function App() {
       const data = await response.json();
       setTranslatedSentences(data.translations);
     } catch (error) {
-      setTranslatedSentences([[["Failed to translate text."]]]);
+      setTranslatedSentences([[[t("Failed to translate")]]]);
     }
   };
 
@@ -116,7 +124,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <h1>Majbyr translate</h1>
+        <h1>{t('app')}</h1>
+        <LanguageSwitcher />
         <Routes>
           <Route
             path="/:src/:tgt"

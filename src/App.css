@@ -106,19 +106,24 @@ textarea:focus {
 }
 
 button {
-  background-color: #ffffff;
-  color: rgba(28,28,28,1);
+  background-color: transparent;
+  color:  #999;
   padding: 10px 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: none;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 button:hover {
-  box-shadow: #ddd;
-  box-shadow: 0 0 10px #ddd;
+  color: #333;
+  box-shadow: none;
+}
+
+button:disabled {
+  color: transparent;
+  cursor: default;
 }
 
 .translation-result p {
@@ -129,35 +134,12 @@ button:hover {
   position: relative;
 }
 
-.tts-button {
-  top: 0;
-  right: 0;
-  border: none;
-  cursor: pointer;
-  background-color: transparent
-}
-
-.tts-button:focus {
-  outline: none;
-}
-
-.tts-button:hover {
-  color: #999;
-  box-shadow: none;
-}
-
-.tts-button:disabled {
-  color: #999;
-  cursor: default;
-  opacity: 0;
-  pointer-events: none;
-}
-
 .sourceText, .translationText {
   min-height: 150px;
   resize: none;
   padding: 10px;
   text-align: left;
+  caret-color: brown;
 }
 
 .sourceText:focus {
@@ -203,6 +185,21 @@ body {
 [contenteditable=plaintext-only]:empty:before{
   content:attr(placeholder);
   color:rgb(193, 179, 179);
+}
+
+.language-switcher {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.language-switcher .active {
+  font-weight: bolder;
+  color: #333;
 }
 
 @media (max-width: 768px) {
@@ -287,17 +284,42 @@ body {
   }
 
   .sourceText {
-    min-height: auto;
-    caret-color: brown;
     min-height: 5vh;
   }
 
-  .tts-button, select {
-    -webkit-tap-highlight-color: transparent;
+  .translationText {
+    min-height: 5vh;
   }
-  .tts-button:hover {
+
+  button, select {
+    -webkit-tap-highlight-color: transparent;
     color: #333;
+  }
+
+  button:hover {
     background-color: transparent;
+  }
+
+  .language-switcher {
+    flex-direction: column;
+
+  }
+  
+  .language-switcher button {
+    display: none;
+    order: 1;
+  }
+  
+  .language-switcher:hover button {
+    display: block;
+    background-color: #fffffff0;
+  }
+  
+  .language-switcher .active {
+    display: block;
+    font-weight: bolder;
+    color: #333;
+    order: 0;
   }
 
 }

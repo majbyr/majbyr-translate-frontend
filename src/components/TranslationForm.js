@@ -1,7 +1,7 @@
 // src/components/TranslationForm.js
 
 import React, { useState, useRef, useEffect } from "react";
-import { iso6393 } from "iso-639-3";
+import { useTranslation } from 'react-i18next';
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useParams, useNavigate } from "react-router-dom";
 import TextEditorArea from "./TextEditorArea";
@@ -16,6 +16,8 @@ function TranslationForm({
   isAudioPlaying,
   setIsAudioPlaying,
 }) {
+  const { t } = useTranslation();
+
   const [sourceText, setSourceText] = useState("");
   const { src, tgt } = useParams();
   const [sourceLang, setSourceLang] = useState(src || "eng");
@@ -82,7 +84,7 @@ function TranslationForm({
   };
 
   const LanguageOption = ({ lang }) => {
-    const languageName = iso6393.find((l) => l.iso6393 === lang).name;
+    const languageName = t(lang)
     return <option value={lang}>{languageName}</option>;
   };
 
