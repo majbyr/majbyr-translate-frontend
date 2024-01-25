@@ -8,10 +8,8 @@ function TextEditorArea({
   sourceText,
   onTts,
   sourceLang,
-  targetLang,
   isAudioPlaying,
   setIsAudioPlaying,
-  isTtsDisabled,
   ttsLanguages,
 }) {
   return (
@@ -21,8 +19,6 @@ function TextEditorArea({
         ref={inputRef}
         contentEditable="plaintext-only"
         placeholder="Enter the text"
-        rows="10"
-        cols="50"
         suppressContentEditableWarning={true}
       ></div>
       <ToolsArea

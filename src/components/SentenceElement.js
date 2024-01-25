@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function SentenceElement({ variants }) {
+function SentenceElement({ variants, onVariantChange }) {
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [showVariants, setShowVariants] = useState(false);
   const [variantPosition, setVariantPosition] = useState({
@@ -33,6 +33,7 @@ function SentenceElement({ variants }) {
 
   const handleSelectVariant = (variant) => () => {
     setSelectedVariant(variant);
+    onVariantChange(variant); // Invoke the callback here
   };
 
   const toggleVariants = (e) => {
