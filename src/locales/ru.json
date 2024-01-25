@@ -1,6 +1,8 @@
 {
   "translation": { 
       "app": "Майбыр переводчик",
+      "description": "Переводчик с Коми и других финно-угорских языков",
+
       "Failed to translate": "Ошибка при переводе",
       "Enter text to translate": "Введите текст",
 

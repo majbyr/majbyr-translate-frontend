@@ -22,6 +22,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true); // New state for loading
 
   useEffect(() => {
+    document.querySelector('meta[name="description"]').setAttribute("content", t('description'));
+  }, [t]);
+
+  useEffect(() => {
     setIsLoading(true);
     const loadData = async () => {
       await getTranslationLanguages();
