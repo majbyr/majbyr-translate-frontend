@@ -33,7 +33,7 @@ function SentenceElement({ variants, onVariantChange }) {
 
   const handleSelectVariant = (variant) => () => {
     setSelectedVariant(variant);
-    onVariantChange(variant); // Invoke the callback here
+    onVariantChange(variant);
   };
 
   const toggleVariants = (e) => {

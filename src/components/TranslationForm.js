@@ -47,7 +47,10 @@ function TranslationForm({
     const handleInput = () => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
-        const inputText = currentInputRef.innerText.replace(/\n{2}/g, "\n");
+        let inputText = currentInputRef.innerText;
+        if (window.chrome) {
+          inputText = inputText.replace(/\n{2}/g, "\n");
+        }
         setSourceText(inputText);
         onTranslate(inputText, sourceLang, targetLang);
       }, 500);
