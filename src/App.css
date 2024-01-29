@@ -182,7 +182,7 @@ body {
   background-color: #ffe9e9;
 }
 
-[contenteditable=plaintext-only]:empty:before{
+[contenteditable]:empty:before{
   content:attr(placeholder);
   color:rgb(193, 179, 179);
 }
@@ -302,7 +302,7 @@ body {
 
   .language-switcher {
     flex-direction: column;
-
+    z-index: 1;
   }
   
   .language-switcher button {
@@ -312,7 +312,7 @@ body {
   
   .language-switcher:hover button {
     display: block;
-    background-color: #fffffff0;
+    background-color: #ffffff;
   }
   
   .language-switcher .active {
