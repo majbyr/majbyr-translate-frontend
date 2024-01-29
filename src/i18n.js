@@ -9,6 +9,7 @@ i18n.use(initReactI18next).init({
       en: require('./locales/en.json'),
       kv: require('./locales/kv.json'),
       ru: require('./locales/ru.json'),
+      udm: require('./locales/udm.json'),
     },
     interpolation: {
       escapeValue: false,
