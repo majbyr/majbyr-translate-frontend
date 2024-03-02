@@ -200,7 +200,20 @@ body {
 .language-switcher .active {
   font-weight: bolder;
   color: #333;
+  opacity: 1;
 }
+
+.language-switcher button {
+  padding: 10px 5px;
+  opacity: 0.5;
+}
+
+.language-switcher img {
+  height: 20px;
+  box-shadow: 0 0 1px #333333aa;
+  border-radius: 10%;
+}
+
 
 @media (max-width: 768px) {
 
@@ -303,11 +316,13 @@ body {
   .language-switcher {
     flex-direction: column;
     z-index: 1;
+    background-color: #ffffff;
   }
   
   .language-switcher button {
     display: none;
     order: 1;
+    padding-right: 10px;
   }
   
   .language-switcher:hover button {

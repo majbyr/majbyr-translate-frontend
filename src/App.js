@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 import TranslationForm from "./components/TranslationForm";
-import LanguageSwitcher from "./components/LanguageSwitcher";
+import LocaleSwitcher from "./components/LocaleSwitcher";
 import "./App.css";
 
 import "./i18n";
@@ -129,7 +129,7 @@ function App() {
     <Router>
       <div className="App">
         <h1>{t('app')}</h1>
-        <LanguageSwitcher />
+        <LocaleSwitcher />
         <Routes>
           <Route
             path="/:src/:tgt"
