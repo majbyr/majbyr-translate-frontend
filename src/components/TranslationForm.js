@@ -25,6 +25,13 @@ function TranslationForm({
   const inputRef = useRef(null);
   const navigate = useNavigate();
 
+  function isBlinkEngine() {
+    const isChrome = window.chrome;
+    const isOpera = typeof navigator.userAgent === "string" && navigator.userAgent.indexOf('OPR') > -1;
+    const isEdge = window.StyleMedia;
+    return isChrome || isOpera || isEdge;
+  }
+
   useEffect(() => {
     if (src) {
       setSourceLang(src);
