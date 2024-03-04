@@ -55,7 +55,7 @@ function TranslationForm({
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
         let inputText = currentInputRef.innerText;
-        if (window.chrome) {
+        if (isBlinkEngine) {
           inputText = inputText.replace(/\n{2}/g, "\n");
         }
         setSourceText(inputText);
