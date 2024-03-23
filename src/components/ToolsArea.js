@@ -22,6 +22,7 @@ function ToolsArea({ text, lang, onTts, ttsLanguages, inTranslation }) {
 
     const copyToClipboard = () => {
         const textArea = document.createElement('textarea');
+        textArea.disabled = true;
         textArea.value = text;
         document.body.appendChild(textArea);
         textArea.select();
