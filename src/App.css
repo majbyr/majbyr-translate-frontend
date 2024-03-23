@@ -8,7 +8,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f7f6;
+  /* background-color: #f4f7f6; */
   color: #333;
   line-height: 1.6;
 }
@@ -18,15 +18,49 @@ body {
   padding: 20px;
 }
 
+.App-header{
+  display: flex;
+  padding: 0;
+  border-bottom: 1px solid #ddd;
+  border-image: linear-gradient(to right, transparent 5%, #ddd 10%, #ddd 85%, transparent 95%) 100% 1;  
+}
+
 h1 {
-  margin-bottom: 20px;
+  margin: 0px;
+  font-size: 1.5rem;
+  color: brown;
+}
+
+.locale-switcher {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  margin-left: auto;
+}
+
+.locale-switcher .active {
+  font-weight: bolder;
+  color: #333;
+  opacity: 1;
+}
+
+.locale-switcher button {
+  padding: 10px 5px;
+  opacity: 0.5;
+}
+
+.locale-switcher img {
+  height: 20px;
+  box-shadow: 0 0 1px #333333aa;
+  border-radius: 10%;
 }
 
 .translation-form {
   background: white;
-  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 1300px;
   max-height: 70%;
   margin: 20px auto;
@@ -46,12 +80,12 @@ h1 {
 
 .text-areas {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 textarea, .translation, .input-area, .translation-area {
-  width: calc(50% - 10px);
+  width: calc(50%);
   border: 1px solid #ddd;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -165,6 +199,7 @@ button:disabled {
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
+  border-radius: 8px;
 }
 
 .sourceText, .translationText {
@@ -187,46 +222,26 @@ body {
   color:rgb(193, 179, 179);
 }
 
-.language-switcher {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.language-switcher .active {
-  font-weight: bolder;
-  color: #333;
-  opacity: 1;
-}
-
-.language-switcher button {
-  padding: 10px 5px;
-  opacity: 0.5;
-}
-
-.language-switcher img {
-  height: 20px;
-  box-shadow: 0 0 1px #333333aa;
-  border-radius: 10%;
-}
-
-
 @media (max-width: 768px) {
 
   .App {
     padding: 0px;
   }
 
+  .App-header{
+    display: grid;
+    padding: 10px;
+    border-bottom: 0;
+    border-image: unset;  
+  }
+
   h1 {
-    margin-bottom: 0px;
+    justify-self: center;
+    margin: unset;
     font-size: large;
+    margin-bottom: 0px;
     color: brown;
     padding-bottom: 10px;
-
   }
 
   body {
@@ -313,24 +328,25 @@ body {
     background-color: transparent;
   }
 
-  .language-switcher {
+  .locale-switcher {
+    position: absolute;
     flex-direction: column;
     z-index: 1;
     background-color: #ffffff;
+    padding: 10px;
   }
   
-  .language-switcher button {
+  .locale-switcher button {
     display: none;
     order: 1;
-    padding-right: 10px;
   }
   
-  .language-switcher:hover button {
+  .locale-switcher:hover button {
     display: block;
     background-color: #ffffff;
   }
   
-  .language-switcher .active {
+  .locale-switcher .active {
     display: block;
     font-weight: bolder;
     color: #333;

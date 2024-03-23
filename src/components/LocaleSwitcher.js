@@ -14,7 +14,7 @@ function LocaleSwitcher() {
   };
 
   return (
-    <div className="language-switcher">
+    <div className="locale-switcher">
       <button
         className={i18n.language === "kv" ? "active" : ""}
         onClick={() => changeLanguage("kv")}

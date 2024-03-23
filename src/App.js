@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 import TranslationForm from "./components/TranslationForm";
 import LocaleSwitcher from "./components/LocaleSwitcher";
@@ -12,7 +12,6 @@ import "./App.css";
 import "./i18n";
 
 function App() {
-  
   const { t } = useTranslation();
 
   const [translatedSentences, setTranslatedSentences] = useState([]);
@@ -22,7 +21,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(true); // New state for loading
 
   useEffect(() => {
-    document.querySelector('meta[name="description"]').setAttribute("content", t('description'));
+    document
+      .querySelector('meta[name="description"]')
+      .setAttribute("content", t("description"));
   }, [t]);
 
   useEffect(() => {
@@ -128,8 +129,10 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <h1>{t('app')}</h1>
-        <LocaleSwitcher />
+        <header className="App-header">
+          <h1>{t("app")}</h1>
+          <LocaleSwitcher />
+        </header>
         <Routes>
           <Route
             path="/:src/:tgt"
