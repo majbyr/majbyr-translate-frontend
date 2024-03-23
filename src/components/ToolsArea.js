@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaVolumeLow, FaStop } from "react-icons/fa6";
+import { FaVolumeLow, FaStop, FaCopy } from "react-icons/fa6";
 
 function ToolsArea({ text, lang, onTts, ttsLanguages, inTranslation }) {
     const [audio, setAudio] = useState(null);
@@ -20,10 +20,32 @@ function ToolsArea({ text, lang, onTts, ttsLanguages, inTranslation }) {
         setAudio(newAudio);
     };
 
+    const copyToClipboard = () => {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+    
+        try {
+            document.execCommand('copy');
+        } catch (err) {
+            console.error('Fallback: Unable to copy', err);
+        }
+    
+        document.body.removeChild(textArea);
+    
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).catch(err => console.error('Async: Could not copy text: ', err));
+        }
+    };
+
     return (
         <div className="tools-area">
             <button className="tts-button" onClick={handleTtsClick} disabled={isTtsDisabled}>
                 {audio ? <FaStop /> : <FaVolumeLow />}
+            </button>
+            <button className="copy-button" onClick={copyToClipboard} disabled={!text}>
+                <FaCopy />
             </button>
         </div>
     );
