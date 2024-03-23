@@ -43,7 +43,7 @@ function App() {
     }
     try {
       const response = await fetch(
-        "https://api-majbyr-translate.rahtiapp.fi/translate_complex/",
+        "https://api-majbyr-translate.rahtiapp.fi/translate_by_sentences/",
         {
           method: "POST",
           headers: {
