@@ -105,23 +105,48 @@ button:focus {
   font-size: 20px;
 }
 
-.languages-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  text-align: left;
+.languages-container {
   position: absolute;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   z-index: 1;
   padding: 0px;
-  width: 50%;
   overflow: hidden;
+  width: 50%;
+  border-top-left-radius: 0%;
+  border-top-right-radius: 0%;
 }
 
-.languages-list.tgt {
+.languages-container.tgt {
   right: 0;
 }
+
+.filter-languages {
+  padding: 15px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  caret-color: brown;
+}
+
+.filter-languages::placeholder {
+  color:rgb(193, 179, 179);
+}
+
+.filter-languages:focus {
+  outline: none;
+
+}
+
+.languages-list {
+  display: grid;
+  grid-template-rows: repeat(9, auto);
+  grid-auto-flow: column;
+  text-align: left;
+  padding: 0px;
+}
+
 
 .language {
   cursor: pointer;
@@ -130,7 +155,7 @@ button:focus {
 
 .languages-list span {
   color:#999;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .languages-list .active span {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaAngleDown } from "react-icons/fa6";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import LanguagesList from "./LanguagesList";
 
 // Custom hook for managing recent languages
@@ -88,7 +88,7 @@ function LanguageSelector({
           className="more-languages-button"
           onClick={() => setLanguagesListVisible(!languagesListVisible)}
         >
-          <FaAngleDown />
+          {languagesListVisible ? <FaAngleUp /> : <FaAngleDown />}
         </button>
       </div>
       {languagesListVisible && (
