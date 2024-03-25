@@ -39,6 +39,7 @@ function TranslationForm({
     if (tgt) {
       setTargetLang(tgt);
     }
+    inputRef.current.focus();
     onTranslate(sourceText, src, tgt);
   }, [src, tgt]);
 

@@ -32,6 +32,9 @@ h1 {
   color: brown;
   flex: 1;
   text-align: left;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .locale-switcher {
@@ -52,6 +55,10 @@ h1 {
 .locale-switcher button {
   padding: 5px 5px 0px 5px;
   opacity: 0.5;
+}
+
+button:focus {
+  outline:0;
 }
 
 .locale-switcher img {
