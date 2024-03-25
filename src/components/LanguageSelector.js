@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import LanguagesList from "./LanguagesList";
 
@@ -31,6 +31,20 @@ function LanguageSelector({
   const [languagesListVisible, setLanguagesListVisible] = useState(false);
   const [recentSourceLanguages, setRecentSourceLanguages] = useRecentLanguages("recentSourceLanguages", selectedLang);
   const [recentTargetLanguages, setRecentTargetLanguages] = useRecentLanguages("recentTargetLanguages", selectedLang);
+  const languagesListRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (languagesListRef.current && !languagesListRef.current.contains(event.target)) {
+        setLanguagesListVisible(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   function updateRecentLanguages(language, isSource) {
     const [recentLanguages, setRecent] = isSource ? [recentSourceLanguages, setRecentSourceLanguages] : [recentTargetLanguages, setRecentTargetLanguages];
@@ -61,7 +75,7 @@ function LanguageSelector({
   const displayRecentLanguages = isSrc ? recentSourceLanguages : recentTargetLanguages;
 
   return (
-    <div className="language-selector">
+    <div className="language-selector" ref={languagesListRef}>
       <select
         value={selectedLang}
         onChange={(e) => {
