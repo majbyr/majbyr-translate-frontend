@@ -18,7 +18,7 @@ function App() {
   const [languages, setLanguages] = useState(null);
   const [ttsLanguages, setTtsLanguages] = useState(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // New state for loading
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     document

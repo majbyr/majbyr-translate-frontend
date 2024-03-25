@@ -39,6 +39,7 @@ function TranslationForm({
     if (tgt) {
       setTargetLang(tgt);
     }
+    onTranslate(sourceText, src, tgt);
   }, [src, tgt]);
 
   useEffect(() => {
@@ -104,7 +105,9 @@ function TranslationForm({
         <LanguageSelector
           selectedLang={sourceLang}
           handleSelectChange={handleSelectChange(setSourceLang, true)}
+          setLanguage={setSourceLang}
           languages={languages}
+          isSrc={true}
           t={t}
         />
         <button className="tts-button" onClick={swapLanguages}>
@@ -113,6 +116,7 @@ function TranslationForm({
         <LanguageSelector
           selectedLang={targetLang}
           handleSelectChange={handleSelectChange(setTargetLang, false)}
+          setLanguage={setTargetLang}
           languages={languages}
           t={t}
         />
