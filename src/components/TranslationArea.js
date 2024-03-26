@@ -12,6 +12,7 @@ function TranslationArea({
   setIsAudioPlaying,
   isTtsDisabled,
   ttsLanguages,
+  translationRef,
 }) {
 
   const [selectedVariants, setSelectedVariants] = useState([]);
@@ -36,7 +37,7 @@ function TranslationArea({
 
   return (
     <div className="translation-area">
-      <div className="translationText">
+      <div className="translationText" ref={translationRef}>
         {translatedSentences.map((paragraph, paragraphIndex) => (
           <div className="paragraph" key={paragraphIndex}>
             {paragraph.map((translationVariants, sentenceIndex) => (

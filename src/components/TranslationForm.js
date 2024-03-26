@@ -23,6 +23,7 @@ function TranslationForm({
   const [sourceLang, setSourceLang] = useState(src || "eng");
   const [targetLang, setTargetLang] = useState(tgt || "kpv");
   const inputRef = useRef(null);
+  const translationRef = useRef(null);
   const navigate = useNavigate();
 
   function isBlinkEngine() {
@@ -85,7 +86,7 @@ function TranslationForm({
     setSourceLang(targetLang);
     setTargetLang(sourceLang);
     const newSourceText =
-      document.getElementsByClassName("translationText")[0].innerText;
+      translationRef.current.innerText
     setSourceText(newSourceText);
     inputRef.current.innerText = newSourceText;
     onTranslate(newSourceText, targetLang, sourceLang);
@@ -134,6 +135,7 @@ function TranslationForm({
           isTtsDisabled={isTtsDisabled}
         />
         <TranslationArea
+          translationRef={translationRef}
           translatedSentences={sourceText.trim() ? translatedSentences : []}
           targetLang={targetLang}
           ttsLanguages={ttsLanguages}
