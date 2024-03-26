@@ -24,6 +24,7 @@ function App() {
     document
       .querySelector('meta[name="description"]')
       .setAttribute("content", t("description"));
+    document.title = t("App");
   }, [t]);
 
   useEffect(() => {
