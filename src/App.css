@@ -88,6 +88,7 @@ button:focus {
 
 .language-selector {
   flex: 1;
+  min-width: 0px;
 }
 
 .language-selectors .active {
@@ -386,6 +387,7 @@ body {
     border: none;
     padding-left: 20px;
     justify-items: start;
+    width: 100%;
   }
 
   .language-selectors .recent-languages {
