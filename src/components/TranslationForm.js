@@ -83,13 +83,11 @@ function TranslationForm({
   }, [sourceLang, targetLang, onTranslate]);
 
   const swapLanguages = () => {
+    const newSourceText = translationRef.current.innerText
+    inputRef.current.innerText = newSourceText;
+    setSourceText(newSourceText);
     setSourceLang(targetLang);
     setTargetLang(sourceLang);
-    const newSourceText =
-      translationRef.current.innerText
-    setSourceText(newSourceText);
-    inputRef.current.innerText = newSourceText;
-    onTranslate(newSourceText, targetLang, sourceLang);
   };
 
   const handleSelectChange = (setter, isSourceLang) => (e) => {
