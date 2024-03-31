@@ -21,9 +21,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    document
-      .querySelector('meta[name="description"]')
-      .setAttribute("content", t("description"));
     document.title = t("app");
   }, [t]);
 
