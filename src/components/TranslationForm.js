@@ -14,6 +14,7 @@ function TranslationForm({
   languages,
   ttsLanguages,
   translatedSentences,
+  setTranslatedSentences,
   isAudioPlaying,
   setIsAudioPlaying,
 }) {
@@ -32,6 +33,10 @@ function TranslationForm({
     const isEdge = window.StyleMedia;
     return isChrome || isOpera || isEdge;
   }
+
+  useEffect(() => {
+    setTranslatedSentences([]);
+  }, [targetLang, setTranslatedSentences]);
 
   useEffect(() => {
     if (src) {

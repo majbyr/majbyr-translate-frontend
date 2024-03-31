@@ -141,6 +141,7 @@ function App() {
                 languages={languages}
                 ttsLanguages={ttsLanguages}
                 translatedSentences={translatedSentences}
+                setTranslatedSentences={setTranslatedSentences}
                 isAudioPlaying={isAudioPlaying}
                 setIsAudioPlaying={setIsAudioPlaying}
               />
