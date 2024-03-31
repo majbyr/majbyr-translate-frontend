@@ -15,15 +15,15 @@ function LocaleSwitcher() {
   const changeLanguage = (language) => {
     // if language unsupported, fallback to default
     i18n.changeLanguage(language);
-    navigate(`?sl=${language}`);
+    navigate(`?locale=${language}`);
     localStorage.setItem("language", language);
   };
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const sl = searchParams.get('sl');
-    if (sl && ['kv', 'udm', 'en', 'ru'].includes(sl)) {
-      i18n.changeLanguage(sl);
+    const locale = searchParams.get('locale');
+    if (locale && ['kv', 'udm', 'en', 'ru'].includes(locale)) {
+      i18n.changeLanguage(locale);
     }
   }, [location, i18n]);
 
