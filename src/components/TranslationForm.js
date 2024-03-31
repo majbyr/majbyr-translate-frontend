@@ -29,14 +29,12 @@ function TranslationForm({
 
   function isBlinkEngine() {
     const isChrome = window.chrome;
-    const isOpera = typeof navigator.userAgent === "string" && navigator.userAgent.indexOf('OPR') > -1;
+    const isOpera =
+      typeof navigator.userAgent === "string" &&
+      navigator.userAgent.indexOf("OPR") > -1;
     const isEdge = window.StyleMedia;
     return isChrome || isOpera || isEdge;
   }
-
-  useEffect(() => {
-    setTranslatedSentences([]);
-  }, [targetLang, setTranslatedSentences]);
 
   useEffect(() => {
     if (src) {
@@ -46,6 +44,11 @@ function TranslationForm({
       setTargetLang(tgt);
     }
     inputRef.current.focus();
+
+    if (setTranslatedSentences) {
+      setTranslatedSentences([]);
+    }
+    
     onTranslate(sourceText, src, tgt);
   }, [src, tgt]);
 
@@ -88,7 +91,7 @@ function TranslationForm({
   }, [sourceLang, targetLang, onTranslate]);
 
   const swapLanguages = () => {
-    const newSourceText = translationRef.current.innerText
+    const newSourceText = translationRef.current.innerText;
     inputRef.current.innerText = newSourceText;
     setSourceText(newSourceText);
     setSourceLang(targetLang);
