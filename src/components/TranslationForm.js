@@ -21,6 +21,7 @@ function TranslationForm({
   const { t } = useTranslation();
   const [sourceText, setSourceText] = useState("");
   const { src, tgt } = useParams();
+  const { locale } = useParams();
   const [sourceLang, setSourceLang] = useState(src || "eng");
   const [targetLang, setTargetLang] = useState(tgt || "kpv");
   const inputRef = useRef(null);
@@ -55,6 +56,9 @@ function TranslationForm({
   [src, tgt]);
   
   useEffect(() => {
+    if (locale) {
+      return;
+    }
     navigate(`/${sourceLang}/${targetLang}`);
   }, 
   // eslint-disable-next-line

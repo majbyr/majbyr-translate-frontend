@@ -165,7 +165,7 @@ function App() {
             }
           />
           <Route
-            path="/:lang"
+            path="/:locale"
             element={
               <TranslationForm
                 onTranslate={handleComplexTranslation}
