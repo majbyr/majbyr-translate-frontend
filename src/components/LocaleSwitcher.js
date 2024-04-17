@@ -24,6 +24,7 @@ function LocaleSwitcher() {
     const locale = searchParams.get('locale');
     if (locale && ['kv', 'udm', 'en', 'ru'].includes(locale)) {
       i18n.changeLanguage(locale);
+      localStorage.setItem("language", locale);
     }
   }, [location, i18n]);
 
