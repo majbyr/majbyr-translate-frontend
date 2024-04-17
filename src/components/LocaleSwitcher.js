@@ -19,14 +19,24 @@ function LocaleSwitcher() {
     localStorage.setItem("language", language);
   };
 
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const locale = searchParams.get('locale');
-    if (locale && ['kv', 'udm', 'en', 'ru'].includes(locale)) {
-      i18n.changeLanguage(locale);
-      localStorage.setItem("language", locale);
+  function setLanguage(language) {
+    if (['kv', 'udm', 'en', 'ru'].includes(language)) {
+      i18n.changeLanguage(language);
+      localStorage.setItem("language", language);
     }
-  }, [location, i18n]);
+  }
+  
+  useEffect(() => {
+    const pathLocations = location.pathname.split("/");
+    const pathLanguage = pathLocations.length === 2 ? pathLocations[1] : null;
+    const searchParams = new URLSearchParams(location.search);
+    const queryLanguage = searchParams.get('locale');
+  
+    // Prefer language setting from the path over the query parameter
+    setLanguage(pathLanguage || queryLanguage);
+  }, 
+  // eslint-disable-next-line
+  [location, i18n]);
 
   return (
     <div className="locale-switcher">
