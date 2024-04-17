@@ -36,7 +36,7 @@ function App() {
     document
       .querySelector('meta[name="description"]')
       .setAttribute("content", t("description"));
-    document.title = t("app");
+    document.title = `${t("domain")} ${t("app")}`;
   }, [t]);
 
   
