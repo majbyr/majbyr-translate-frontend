@@ -365,10 +365,12 @@ body {
   }
 
   .app-header{
-    display: grid;
+    display: flex;
     padding: 10px;
     border-bottom: 0;
-    border-image: unset;  
+    border-image: unset; 
+    padding-bottom: 20px;
+    padding-right: 40px; 
   }
 
   h1 {
@@ -377,7 +379,9 @@ body {
     font-size: large;
     margin-bottom: 0px;
     color: brown;
-    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+
   }
 
   body {
@@ -475,7 +479,6 @@ body {
     position: absolute;
     flex-direction: column;
     z-index: 1;
-    background-color: #ffffff;
     padding: 10px;
   }
   
@@ -486,6 +489,9 @@ body {
   
   .locale-switcher:hover button {
     display: block;
+  }
+
+  .locale-switcher:hover {
     background-color: #ffffff;
   }
   
