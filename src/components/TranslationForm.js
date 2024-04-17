@@ -50,11 +50,15 @@ function TranslationForm({
     }
     
     onTranslate(sourceText, src, tgt);
-  }, [src, tgt]);
-
+  },
+  // eslint-disable-next-line
+  [src, tgt]);
+  
   useEffect(() => {
     navigate(`/${sourceLang}/${targetLang}`);
-  }, [sourceLang, targetLang, navigate]);
+  }, 
+  // eslint-disable-next-line
+  [sourceLang, targetLang]);
 
   useEffect(() => {
     const currentInputRef = inputRef.current;

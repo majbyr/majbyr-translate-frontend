@@ -1,4 +1,4 @@
-/* src/App.css */
+/* src/app.css */
 /* * {
   box-sizing: border-box;
   margin: 0;
@@ -13,17 +13,22 @@ body {
   line-height: 1.6;
 }
 
-.App {
+.app {
   text-align: center;
   padding: 20px;
 }
 
-.App-header{
+.app-header{
   display: flex;
   align-items: center;
   padding: 5px;
   border-bottom: 1px solid #ddd;
   border-image: linear-gradient(to right, transparent 5%, #ddd 10%, #ddd 85%, transparent 95%) 100% 1;  
+}
+
+.app-logo {
+  height: 22px;
+  margin-right: 10px;
 }
 
 h1 {
@@ -35,6 +40,12 @@ h1 {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+}
+
+.domain-name {
+  color: #444;
+  padding-right: 5px;
+  font-weight: bold;
 }
 
 .locale-switcher {
@@ -63,7 +74,7 @@ button:focus {
 
 .locale-switcher img {
   height: 20px;
-  box-shadow: 0 0 1px #333333aa;
+  box-shadow: 0 0 2px #333333aa;
   border-radius: 10%;
 }
 
@@ -196,6 +207,24 @@ textarea, .translation, .input-area, .translation-area {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-bottom-right-radius: 8px;
   border-top-right-radius: 8px;
+}
+
+.input-area {
+  position: relative;
+}
+
+.incorrect-chars-warning {
+  color: rgba(165, 42, 42, 0.6);
+  font-size: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.incorrect-chars-warning:hover {
+  color: brown;
 }
 
 .translation {
@@ -331,11 +360,11 @@ body {
 
 @media (max-width: 800px) {
 
-  .App {
+  .app {
     padding: 0px;
   }
 
-  .App-header{
+  .app-header{
     display: grid;
     padding: 10px;
     border-bottom: 0;

@@ -1,15 +1,18 @@
 // src/App.js
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 
-import { useTranslation } from "react-i18next";
+
+import logo from "./assets/logo.svg";
 
 import TranslationForm from "./components/TranslationForm";
 import LocaleSwitcher from "./components/LocaleSwitcher";
 import "./App.css";
 
 import "./i18n";
+import { useTranslation } from "react-i18next";
+import { updateHreflangTags }  from './utils/updateHreflangTags';
 
 function App() {
   const { t } = useTranslation();
@@ -19,6 +22,15 @@ function App() {
   const [ttsLanguages, setTtsLanguages] = useState(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  
+  const { i18n } = useTranslation();
+  const { lang } = useParams();
+  
+  useEffect(() => {
+    const currentLang = lang || i18n.language;
+    const languages = [{ code: 'en' }, { code: 'ru' }, { code: 'kv' }, { code: 'udm' }]; // List all your language codes
+    updateHreflangTags(currentLang, languages);
+  }, [lang, i18n.language]);
 
   useEffect(() => {
     document
@@ -27,6 +39,7 @@ function App() {
     document.title = t("app");
   }, [t]);
 
+  
   useEffect(() => {
     setIsLoading(true);
     const loadData = async () => {
@@ -129,9 +142,10 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <h1>{t("app")}</h1>
+      <div className="app">
+        <header className="app-header">
+          <img src={logo} className="app-logo" alt="logo" />
+          <h1><span className="domain-name">{t("domain")}</span><span className="app-name">{t("app")}</span></h1>
           <LocaleSwitcher />
         </header>
         <Routes>
@@ -145,6 +159,20 @@ function App() {
                 ttsLanguages={ttsLanguages}
                 translatedSentences={translatedSentences}
                 setTranslatedSentences={setTranslatedSentences}
+                isAudioPlaying={isAudioPlaying}
+                setIsAudioPlaying={setIsAudioPlaying}
+              />
+            }
+          />
+          <Route
+            path="/:lang"
+            element={
+              <TranslationForm
+                onTranslate={handleComplexTranslation}
+                onTts={(text, lang) => handleTts(text, lang, setIsAudioPlaying)}
+                languages={languages}
+                ttsLanguages={ttsLanguages}
+                translatedSentences={translatedSentences}
                 isAudioPlaying={isAudioPlaying}
                 setIsAudioPlaying={setIsAudioPlaying}
               />
