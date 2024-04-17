@@ -15,8 +15,10 @@ function LocaleSwitcher() {
   const changeLanguage = (language) => {
     // if language unsupported, fallback to default
     i18n.changeLanguage(language);
-    navigate(`/${language}`);
     localStorage.setItem("language", language);
+    if (language !== i18n.language) {
+      navigate(`/${language}`);
+    }
   };
 
   function setLanguage(language) {
