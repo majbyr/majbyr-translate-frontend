@@ -1,6 +1,7 @@
 // src/App.js
 
 import React, { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 
 
@@ -27,6 +28,19 @@ function App() {
   const { lang } = useParams();
   
   const abortControllerRef = useRef(null);
+
+  const StructuredData = ({ t }) => (
+    <Helmet>
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Majbyr",
+          "url": window.location.origin,
+        })}
+      </script>
+    </Helmet>
+  );
 
   useEffect(() => {
     const currentLang = lang || i18n.language;
@@ -162,6 +176,7 @@ function App() {
   return (
     <Router>
       <div className="app">
+        <StructuredData t={t} />
         <header className="app-header">
           <img src={logo} className="app-logo" alt="logo" />
           <h1><span className="domain-name">{t("domain")}</span><span className="app-name">{t("app")}</span></h1>
