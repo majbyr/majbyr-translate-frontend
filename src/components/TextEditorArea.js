@@ -20,6 +20,11 @@ function TextEditorArea({
   const { t } = useTranslation();
   const [debounceTimer, setDebounceTimer] = useState(null);
 
+  const splitIntoSentences = (text) => {
+    // Split on period followed by space or end of string, question mark, or exclamation mark
+    return text.match(/[^.!?]+[.!?]+|\s*[^.!?]+$/g) || [];
+  };
+
   const handleKeyDown = (event) => {
     const blockedKeys = ["b", "i", "u"];
     if ((event.metaKey || event.ctrlKey) && blockedKeys.includes(event.key)) {
@@ -30,11 +35,29 @@ function TextEditorArea({
   const handleTextareaChange = (event) => {
     if (inputRef.current) {
       const newText = event.target.value;
-      // Convert line breaks to div elements and preserve empty lines
-      const formattedText = newText.split('\n').map(line => 
-        line.trim() === '' ? '<div><br></div>' : 
-        `<div>${line.replace(/^ +/g, match => '&nbsp;'.repeat(match.length))}</div>`
-      ).join('');
+      // Convert line breaks to div elements and preserve exact whitespace
+      const formattedText = newText.split('\n').map(line => {
+        if (line.trim() === '') {
+          return '<div><br></div>';
+        }
+        
+        // Split into sentences but maintain original spacing
+        const sentences = splitIntoSentences(line);
+        let currentPosition = 0;
+        const formattedSentences = sentences.map(sentence => {
+          // Find the exact position of this sentence in the original line
+          const sentenceStart = line.indexOf(sentence, currentPosition);
+          const leadingSpaces = line.substring(currentPosition, sentenceStart);
+          currentPosition = sentenceStart + sentence.length;
+          
+          // Preserve exact whitespace using non-breaking spaces
+          const preservedSpaces = leadingSpaces.replace(/ /g, '&nbsp;');
+          return preservedSpaces + `<span data-sentence>${sentence}</span>`;
+        }).join('');
+        
+        return `<div style="white-space: pre-wrap;">${formattedSentences}</div>`;
+      }).join('');
+
       inputRef.current.innerHTML = formattedText;
       setSourceText(newText);
 

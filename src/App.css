@@ -261,8 +261,7 @@ button:focus {
   height: 50%;
   z-Index: 2;
   resize: none;
-  white-Space: 'pre-wrap';
-  
+  white-Space: pre-wrap;
 }
 
 textarea:focus {
