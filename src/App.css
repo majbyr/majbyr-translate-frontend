@@ -490,6 +490,12 @@ body {
     background-color: transparent;
   }
 
+  button.clicked {
+    background-color: rgba(165, 42, 42, 0.100);
+    transform: scale(0.95);
+    transition: transform 0.1s ease, background-color 0.2s ease;
+  }
+
   .locale-switcher {
     position: absolute;
     flex-direction: column;
@@ -515,6 +521,22 @@ body {
     font-weight: bolder;
     color: #333;
     order: 0;
+  }
+
+  .sourceText:focus, .translationText {
+    transition: font-size 0.3s ease;
+  }
+
+  .sourceText:not(:empty), .translationText:not(:empty) {
+    font-size: x-large;
+  }
+
+  .sourceText.long-text, .translationText.long-text {
+    font-size: medium;
+  }
+
+  .sourceText.very-long-text, .translationText.very-long-text {
+    font-size: small;
   }
 
 }

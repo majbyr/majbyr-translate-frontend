@@ -39,6 +39,25 @@ function TranslationForm({
     return isChrome || isOpera || isEdge;
   }
 
+  const updateTextSizeClass = (text) => {
+    const sourceEl = inputRef.current;
+    const translationEl = translationRef.current;
+    if (!sourceEl || !translationEl) return;
+
+    ['long-text', 'very-long-text'].forEach(cls => {
+      sourceEl.classList.remove(cls);
+      translationEl.classList.remove(cls);
+    });
+
+    if (text.length > 200) {
+      sourceEl.classList.add('very-long-text');
+      translationEl.classList.add('very-long-text');
+    } else if (text.length > 100) {
+      sourceEl.classList.add('long-text');
+      translationEl.classList.add('long-text');
+    }
+  };
+
   useEffect(() => {
     if (src) {
       setSourceLang(src);
@@ -100,6 +119,10 @@ function TranslationForm({
       clearTimeout(debounceTimer);
     };
   }, [sourceLang, targetLang, onTranslate, sourceText]);
+
+  useEffect(() => {
+    updateTextSizeClass(sourceText);
+  }, [sourceText]);
 
   const swapLanguages = () => {
     setIsRevertClicked(true);
