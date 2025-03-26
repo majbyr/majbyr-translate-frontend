@@ -250,6 +250,7 @@ button:focus {
 .variant:hover {
   background-color: #ffd2d2;
 }
+
 .source-text-overlay {
   position: absolute;
   background-color: transparent;
@@ -262,10 +263,21 @@ button:focus {
   z-Index: 2;
   resize: none;
   white-Space: pre-wrap;
+  border: none;
+  caret-color: brown;
+  color: inherit;
+}
+
+.source-text-overlay::placeholder {
+  color: rgb(193, 179, 179);
 }
 
 textarea:focus {
   outline: none;
+}
+
+.source-sentence.highlighted {
+  background-color: #ffd2d2;
 }
 
 .translated-sentence {
@@ -314,6 +326,22 @@ button:disabled {
   cursor: default;
 }
 
+.clear-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-Index: 3;
+}
+
+.clear-button:disabled {
+  color: transparent;
+  cursor: default;
+}
+
+.clear-button:not(:disabled):hover {
+  color: #333;
+}
+
 .translation-result p {
   word-wrap: break-word;
 }
@@ -327,7 +355,10 @@ button:disabled {
   resize: none;
   padding: 10px;
   text-align: left;
-  caret-color: brown;
+}
+
+.source-text {
+  color: transparent;
 }
 
 .source-text:focus {
@@ -341,7 +372,7 @@ button:disabled {
   padding: 5px;
 }
 
-.tools-area button, .revert-languages-button, .more-button {
+.tools-area button, .revert-languages-button, .more-button, .clear-button {
   border-radius: 30px;
 }
 
@@ -381,7 +412,7 @@ body {
   background-color: #ffe9e9;
 }
 
-[contenteditable]:empty:before{
+[contenteditable]:empty:before {
   content:attr(placeholder);
   color:rgb(193, 179, 179);
 }

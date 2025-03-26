@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function SentenceElement({ variants, onVariantChange }) {
+function SentenceElement({ variants, onVariantChange, paraIndex, sentIndex }) {
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [showVariants, setShowVariants] = useState(false);
   const [variantPosition, setVariantPosition] = useState({
@@ -54,10 +54,30 @@ function SentenceElement({ variants, onVariantChange }) {
     setVariantPosition({ top, left, width });
   };
 
+  const handleMouseEnter = () => {
+    const sourceElement = document.querySelector(
+      `.source-sentence[data-para-index="${paraIndex}"][data-sent-index="${sentIndex}"]`
+    );
+    if (sourceElement) {
+      sourceElement.classList.add('highlighted');
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const sourceElement = document.querySelector(
+      `.source-sentence[data-para-index="${paraIndex}"][data-sent-index="${sentIndex}"]`
+    );
+    if (sourceElement) {
+      sourceElement.classList.remove('highlighted');
+    }
+  };
+
   return (
     <span
       className={`translated-sentence ${ showVariants ? "show-variants" : "" }`} 
       onClick={toggleVariants}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       ref={containerRef}
     >
       {selectedVariant}{" "}
