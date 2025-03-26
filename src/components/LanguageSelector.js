@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import LanguagesList from "./LanguagesList";
 
-// Custom hook for managing recent languages
 function useRecentLanguages(storageKey, selectedLang) {
   const [recentLanguages, setRecentLanguages] = useState(() => {
     const saved = localStorage.getItem(storageKey);
@@ -32,6 +31,9 @@ function LanguageSelector({
   const [recentSourceLanguages, setRecentSourceLanguages] = useRecentLanguages("recentSourceLanguages", selectedLang);
   const [recentTargetLanguages, setRecentTargetLanguages] = useRecentLanguages("recentTargetLanguages", selectedLang);
   const languagesListRef = useRef(null);
+  const [isMoreButtonClicked, setIsMoreButtonClicked] = useState(false);
+  const [isLangusageButtonClicked, setIsLangusageButtonClicked] = useState(false);
+  const [clickedLanguage, setClickedLanguage] = useState(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -92,15 +94,23 @@ function LanguageSelector({
         {displayRecentLanguages.map((lang) => (
           <button
             key={lang}
-            className={selectedLang === lang ? "language active" : "language"}
-            onClick={() => onLanguageSelect(lang)}
+            className={`language ${selectedLang === lang ? "active" : ""} ${clickedLanguage === lang ? "clicked" : ""}`}
+            onClick={() => {
+              onLanguageSelect(lang);
+              setClickedLanguage(lang); // Set the clicked language
+              setTimeout(() => setClickedLanguage(null), 200); // Reset after 200ms
+            }}
           >
             {t(lang)}
           </button>
         ))}
         <button
-          className="more-languages-button"
-          onClick={() => setLanguagesListVisible(!languagesListVisible)}
+          className={`more-button ${isMoreButtonClicked ? "clicked" : ""}`}
+          onClick={() => {
+            setIsMoreButtonClicked(true);
+            setTimeout(() => setIsMoreButtonClicked(false), 200);
+            setLanguagesListVisible((prev) => !prev);
+          }}
         >
           {languagesListVisible ? <FaAngleUp /> : <FaAngleDown />}
         </button>

@@ -10,7 +10,7 @@ function ToolsArea({ text, lang, onTts, ttsLanguages, inTranslation }) {
 
     const handleTtsClick = async () => {
         setIsTtsClicked(true);
-        setTimeout(() => setIsTtsClicked(false), 200); // Reset after 200ms
+        setTimeout(() => setIsTtsClicked(false), 200);
 
         if (audio) {
             audio.pause();
@@ -25,7 +25,7 @@ function ToolsArea({ text, lang, onTts, ttsLanguages, inTranslation }) {
 
     const copyToClipboard = () => {
         setIsCopyClicked(true);
-        setTimeout(() => setIsCopyClicked(false), 200); // Reset after 200ms
+        setTimeout(() => setIsCopyClicked(false), 200);
 
         const textArea = document.createElement('textarea');
         textArea.disabled = true;
