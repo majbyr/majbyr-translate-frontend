@@ -206,7 +206,7 @@ button:focus {
   border-radius: 8px;
 }
 
-textarea, .translation, .input-area, .translation-area {
+.translation, .input-area, .translation-area {
   width: 50%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-bottom-right-radius: 8px;
@@ -249,6 +249,20 @@ textarea, .translation, .input-area, .translation-area {
 
 .variant:hover {
   background-color: #ffd2d2;
+}
+.source-text-overlay {
+  position: absolute;
+  background-color: transparent;
+  font: inherit;
+  padding: 10px;
+  top: 0;
+  left: 0;
+  width: calc(100% - 20px);
+  height: 50%;
+  z-Index: 2;
+  resize: none;
+  white-Space: 'pre-wrap';
+  
 }
 
 textarea:focus {

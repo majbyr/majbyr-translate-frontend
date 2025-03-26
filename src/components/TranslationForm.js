@@ -29,6 +29,7 @@ function TranslationForm({
   const navigate = useNavigate();
   const latestInputRef = useRef(sourceText);
   const [isRevertClicked, setIsRevertClicked] = useState(false);
+  const textareaRef = useRef(null);
 
   function isBlinkEngine() {
     const isChrome = window.chrome;
@@ -65,7 +66,9 @@ function TranslationForm({
     if (tgt) {
       setTargetLang(tgt);
     }
-    inputRef.current.focus();
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
 
     if (setTranslatedSentences) {
       setTranslatedSentences([]);
@@ -127,12 +130,24 @@ function TranslationForm({
   const swapLanguages = () => {
     setIsRevertClicked(true);
     setTimeout(() => setIsRevertClicked(false), 200);
+    
     const newSourceText = translationRef.current.innerText;
-    inputRef.current.innerText = newSourceText;
+    inputRef.current.innerHTML = newSourceText.split('\n').map(line => 
+      line.trim() === '' ? '<div><br></div>' : 
+      `<div>${line.replace(/^ +/g, match => '&nbsp;'.repeat(match.length))}</div>`
+    ).join('');
+    
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.value = newSourceText;
+      textarea.focus();
+      textarea.setSelectionRange(newSourceText.length, newSourceText.length);
+    }
+    
     setSourceText(newSourceText);
     setSourceLang(targetLang);
     setTargetLang(sourceLang);
-};
+  };
 
   const handleSelectChange = (setter, isSourceLang) => (e) => {
     const newLang = e.target.value;
@@ -171,9 +186,13 @@ function TranslationForm({
       <div className="text-areas">
         <TextEditorArea
           inputRef={inputRef}
+          textareaRef={textareaRef}
           sourceText={sourceText}
+          setSourceText={setSourceText}
           ttsLanguages={ttsLanguages}
           sourceLang={sourceLang}
+          targetLang={targetLang}
+          onTranslate={onTranslate}
           isAudioPlaying={isAudioPlaying}
           onTts={onTts}
           setIsAudioPlaying={setIsAudioPlaying}
