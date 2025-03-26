@@ -28,6 +28,7 @@ function TranslationForm({
   const translationRef = useRef(null);
   const navigate = useNavigate();
   const latestInputRef = useRef(sourceText);
+  const [isRevertClicked, setIsRevertClicked] = useState(false);
 
   function isBlinkEngine() {
     const isChrome = window.chrome;
@@ -101,12 +102,14 @@ function TranslationForm({
   }, [sourceLang, targetLang, onTranslate, sourceText]);
 
   const swapLanguages = () => {
+    setIsRevertClicked(true);
+    setTimeout(() => setIsRevertClicked(false), 200);
     const newSourceText = translationRef.current.innerText;
     inputRef.current.innerText = newSourceText;
     setSourceText(newSourceText);
     setSourceLang(targetLang);
     setTargetLang(sourceLang);
-  };
+};
 
   const handleSelectChange = (setter, isSourceLang) => (e) => {
     const newLang = e.target.value;
@@ -128,8 +131,11 @@ function TranslationForm({
           isSrc={true}
           t={t}
         />
-        <button className="tts-button" onClick={swapLanguages}>
-          <FaArrowRightArrowLeft />
+        <button
+            className={`revert-languages-button ${isRevertClicked ? "clicked" : ""}`}
+            onClick={swapLanguages}
+        >
+            <FaArrowRightArrowLeft />
         </button>
         <LanguageSelector
           selectedLang={targetLang}

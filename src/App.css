@@ -325,6 +325,18 @@ button:disabled {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 5px;
+}
+
+.tools-area button, .revert-languages-button {
+  font-size: 17px;
+  border-radius: 34px;
+}
+
+.tts-button.clicked, .copy-button.clicked, .revert-languages-button.clicked {
+  background-color: rgba(165, 42, 42, 0.100);
+  transform: scale(0.95);
+  transition: transform 0.1s ease, background-color 0.2s ease;
 }
 
 .translation-area {
