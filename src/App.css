@@ -255,14 +255,14 @@ textarea:focus {
   outline: none;
 }
 
-.translatedSentence {
+.translated-sentence {
   cursor: pointer;
   white-space: pre-wrap;
   z-index: auto;
   position: relative;
 }
 
-.translatedSentence:hover, .showVariants {
+.translated-sentence:hover, .show-variants {
   background-color: #ffd2d2;
 }
 
@@ -309,7 +309,7 @@ button:disabled {
   position: relative;
 }
 
-.sourceText, .translationText {
+.source-text, .translation-text {
   min-height: 185px;
   resize: none;
   padding: 10px;
@@ -317,7 +317,7 @@ button:disabled {
   caret-color: brown;
 }
 
-.sourceText:focus {
+.source-text:focus {
   outline: none;
 }
 
@@ -353,7 +353,7 @@ button.clicked {
   justify-content: space-between; 
 }
 
-.sourceText, .translationText {
+.source-text, .translation-text {
   flex-grow: 1; 
 }
 
@@ -473,11 +473,11 @@ body {
     border-bottom-right-radius: 30px;
   }
 
-  .sourceText {
+  .source-text {
     min-height: 5vh;
   }
 
-  .translationText {
+  .translation-text {
     min-height: 5vh;
   }
 
@@ -523,19 +523,19 @@ body {
     order: 0;
   }
 
-  .sourceText:focus, .translationText {
+  .source-text:focus, .translation-text {
     transition: font-size 0.3s ease;
   }
 
-  .sourceText:not(:empty), .translationText:not(:empty) {
+  .source-text:not(:empty), .translation-text:not(:empty) {
     font-size: x-large;
   }
 
-  .sourceText.long-text, .translationText.long-text {
+  .source-text.long-text, .translation-text.long-text {
     font-size: medium;
   }
 
-  .sourceText.very-long-text, .translationText.very-long-text {
+  .source-text.very-long-text, .translation-text.very-long-text {
     font-size: small;
   }
 

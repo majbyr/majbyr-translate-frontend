@@ -56,7 +56,7 @@ function SentenceElement({ variants, onVariantChange }) {
 
   return (
     <span
-      className={`translatedSentence ${ showVariants ? "showVariants" : "" }`} 
+      className={`translated-sentence ${ showVariants ? "show-variants" : "" }`} 
       onClick={toggleVariants}
       ref={containerRef}
     >

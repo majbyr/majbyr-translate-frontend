@@ -37,7 +37,7 @@ function TranslationArea({
 
   return (
     <div className="translation-area">
-      <div className="translationText" ref={translationRef}>
+      <div className="translation-text" ref={translationRef}>
         {translatedSentences.map((paragraph, paragraphIndex) => (
           <div className="paragraph" key={paragraphIndex}>
             {paragraph.map((translationVariants, sentenceIndex) => (

@@ -34,7 +34,7 @@ function TextEditorArea({
   return (
     <div className="input-area">
       <div
-        className="sourceText"
+        className="source-text"
         ref={inputRef}
         contentEditable={true}
         placeholder={t("Enter text to translate")}
