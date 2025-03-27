@@ -326,13 +326,8 @@ button:disabled {
   cursor: default;
 }
 
-.clear-button:disabled {
-  color: transparent;
-  cursor: default;
-}
-
-.clear-button:not(:disabled):hover {
-  color: #333;
+.clear-button {
+  display: none;
 }
 
 .translation-result p {
@@ -461,8 +456,7 @@ body {
 
   .language-selectors select {
     display: block;
-    align-self: center;
-    font-size: large;   
+    align-self: center; 
     padding: 0px; 
     margin: 0px;
     flex-grow: 1;
@@ -473,6 +467,7 @@ body {
     padding-left: 20px;
     justify-items: start;
     width: 100%;
+    font-size: medium;
   }
 
   .language-selectors .recent-languages {
@@ -533,10 +528,16 @@ body {
     transition: transform 0.1s ease, background-color 0.2s ease;
   }
 
+  .clear-button {
+    display: block;
+    padding: 10px;
+    font-size: large;
+  }
+
   .locale-switcher {
     position: absolute;
     flex-direction: column;
-    z-index: 1;
+    z-index: 4;
     padding: 10px;
   }
   
