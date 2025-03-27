@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import { FaTimes } from "react-icons/fa";
 import { useParams, useNavigate } from "react-router-dom";
 import TextEditorArea from "./TextEditorArea";
 import TranslationArea from "./TranslationArea";
@@ -30,6 +31,7 @@ function TranslationForm({
   const latestInputRef = useRef(sourceText);
   const [isRevertClicked, setIsRevertClicked] = useState(false);
   const textareaRef = useRef(null);
+  const [isClearClicked, setIsClearClicked] = useState(false);
 
   function isBlinkEngine() {
     const isChrome = window.chrome;
@@ -158,6 +160,18 @@ function TranslationForm({
 
   const isTtsDisabled = (lang) => !ttsLanguages.includes(lang);
 
+  const handleClear = () => {
+    setIsClearClicked(true);
+    setTimeout(() => setIsClearClicked(false), 200);
+
+    if (textareaRef.current) {
+      textareaRef.current.value = '';
+      inputRef.current.innerHTML = '';
+      setSourceText('');
+      onTranslate('', sourceLang, targetLang);
+    }
+  };
+
   return (
     <div className="translation-form">
       <div className="language-selectors">
@@ -182,6 +196,16 @@ function TranslationForm({
           languages={languages}
           t={t}
         />
+        {
+          sourceText && (
+            <button
+              className={`clear-button ${isClearClicked ? "clicked" : ""}`}
+              onClick={handleClear}
+            >
+              <FaTimes />
+            </button>
+          )
+        }
       </div>
       <div className="text-areas">
         <TextEditorArea

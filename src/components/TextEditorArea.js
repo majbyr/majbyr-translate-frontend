@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import ToolsArea from "./ToolsArea";
 import { useTranslation } from "react-i18next";
-import { FaTimes } from "react-icons/fa";
 
 function TextEditorArea({
   inputRef,
@@ -20,7 +19,6 @@ function TextEditorArea({
 }) {
   const { t } = useTranslation();
   const [debounceTimer, setDebounceTimer] = useState(null);
-  const [isClearClicked, setIsClearClicked] = useState(false);
 
   const splitIntoSentences = (text) => {
     // Split on period followed by space or end of string, question mark, or exclamation mark
@@ -75,18 +73,6 @@ function TextEditorArea({
     }
   };
 
-  const handleClear = () => {
-    setIsClearClicked(true);
-    setTimeout(() => setIsClearClicked(false), 200);
-
-    if (textareaRef.current) {
-      textareaRef.current.value = '';
-      inputRef.current.innerHTML = '';
-      setSourceText('');
-      onTranslate('', sourceLang, targetLang);
-    }
-  };
-
   useEffect(() => {
     const div = inputRef.current;
     div.addEventListener("keydown", handleKeyDown);
@@ -121,13 +107,6 @@ function TextEditorArea({
 
   return (
     <div className="input-area" style={{ position: 'relative' }}>
-      <button
-        className={`clear-button ${isClearClicked ? "clicked" : ""}`}
-        onClick={handleClear}
-        disabled={!sourceText}
-      >
-        <FaTimes />
-      </button>
       <textarea
         ref={textareaRef}
         className="source-text-overlay"

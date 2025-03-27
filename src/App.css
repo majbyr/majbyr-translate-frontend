@@ -326,13 +326,6 @@ button:disabled {
   cursor: default;
 }
 
-.clear-button {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  z-Index: 3;
-}
-
 .clear-button:disabled {
   color: transparent;
   cursor: default;
