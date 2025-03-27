@@ -91,6 +91,7 @@ button:focus {
   flex-direction: row;
   justify-content: center;
   position: relative;
+  transition: all 0.3s ease;
 }
 
 .language-selectors select {
@@ -99,7 +100,7 @@ button:focus {
 
 .language-selector {
   flex: 1;
-  min-width: 0px;
+  min-width: 0;
 }
 
 .language-selectors .active {
@@ -109,6 +110,7 @@ button:focus {
 
 .recent-languages {
   display: flex;
+  transition: all 0.3s ease;
 }
 
 .more-languages-button {
@@ -204,6 +206,7 @@ button:focus {
   margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .translation, .input-area, .translation-area {
@@ -312,8 +315,8 @@ button {
   border: none;
   cursor: pointer;
   font-size: 15px;
-  transition: background-color 0.3s;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
 }
 
 button:hover {
@@ -452,6 +455,7 @@ body {
     border-bottom: 1px solid;
     border-image: linear-gradient(to right, transparent 10%, #ddd 25%, #ddd 75%, transparent 90%) 100% 1;  
     align-items: center;
+    transition: all 0.3s ease;
   }
 
   .language-selectors select {

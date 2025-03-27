@@ -199,7 +199,7 @@ function TranslationForm({
         {
           sourceText && (
             <button
-              className={`clear-button ${isClearClicked ? "clicked" : ""}`}
+              className={`clear-button ${isClearClicked ? "clicked" : ""} ${sourceText ? "show" : ""}`}
               onClick={handleClear}
             >
               <FaTimes />
