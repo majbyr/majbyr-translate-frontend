@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
-
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 import logo from "./assets/logo.svg";
 
@@ -15,7 +15,7 @@ import "./i18n";
 import { useTranslation } from "react-i18next";
 import { updateHreflangTags }  from './utils/updateHreflangTags';
 
-function App() {
+function AppContent() {
   const { t } = useTranslation();
 
   const [translatedSentences, setTranslatedSentences] = useState([]);
@@ -181,6 +181,7 @@ function App() {
           <img src={logo} className="app-logo" alt="logo" />
           <h1><span className="domain-name">{t("domain")}</span><span className="app-name">{t("app")}</span></h1>
           <LocaleSwitcher />
+      
         </header>
         <Routes>
           <Route
@@ -229,6 +230,14 @@ function App() {
         </Routes>
       </div>
     </Router>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

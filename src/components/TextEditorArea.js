@@ -113,6 +113,7 @@ function TextEditorArea({
         onChange={handleTextareaChange}
         defaultValue=""
         placeholder={t("Enter text to translate")}
+        style={{ overflow: 'hidden' }}
       />
       <div
         className="source-text"

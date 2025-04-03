@@ -1,29 +1,49 @@
 /* src/app.css */
-/* * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-} */
+:root {
+  --bg-primary: #fff;
+  --bg-secondary: #ffffff;
+  --bg-translation: #f2f2f2;
+  --text-primary: #333333;
+  --text-secondary: #444;
+  --border-color: #dddddd;
+  --accent-color: brown;
+  --hover-bg: #ffe9e9;
+  --active-bg: #ffd2d2;
+}
 
+.dark-mode {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #1a1a1a;
+  --bg-translation: #2d2d2d;
+  --text-primary: #cccccc;
+  --text-secondary: #cccccc;
+  --border-color: #404040;
+  --accent-color: brown;
+  --hover-bg: #544444;
+  --active-bg: #4d3939;
+}
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  /* background-color: #f4f7f6; */
-  color: #333;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   line-height: 1.6;
 }
 
 .app {
   text-align: center;
   padding: 20px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
 }
 
 .app-header{
   display: flex;
   align-items: center;
   padding: 5px;
-  border-bottom: 1px solid #ddd;
-  border-image: linear-gradient(to right, transparent 5%, #ddd 10%, #ddd 85%, transparent 95%) 100% 1;  
+  border-bottom: 1px solid var(--border-color);
+  border-image: linear-gradient(to right, transparent 5%, var(--border-color) 10%, var(--border-color) 85%, transparent 95%) 100% 1;
 }
 
 .app-logo {
@@ -34,7 +54,7 @@ body {
 h1 {
   margin: 0px;
   font-size: 1.2rem;
-  color: brown;
+  color: var(--accent-color);
   flex: 1;
   text-align: left;
   -webkit-user-select: none; /* Safari */
@@ -43,7 +63,7 @@ h1 {
 }
 
 .domain-name {
-  color: #444;
+  color: var(--text-secondary);
   padding-right: 5px;
   font-weight: bold;
 }
@@ -59,7 +79,7 @@ h1 {
 
 .locale-switcher .active {
   font-weight: bolder;
-  color: #333;
+  color: var(--text-primary);
   opacity: 1;
 }
 
@@ -79,7 +99,7 @@ button:focus {
 }
 
 .translation-form {
-  background: white;
+
   border-radius: 8px;
   max-width: 1300px;
   max-height: 70%;
@@ -103,8 +123,8 @@ button:focus {
 }
 
 .language-selectors .active {
-  border-color: brown;
-  color: #333;
+  border-color: var(--accent-color);
+  color: var(--text-primary);
 }
 
 .recent-languages {
@@ -119,8 +139,8 @@ button:focus {
 
 .languages-container {
   position: absolute;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   z-index: 4;
   padding: 0px;
@@ -146,12 +166,14 @@ button:focus {
   padding: 15px;
   width: 100%;
   border: none;
-  border-bottom: 1px solid #ddd;
-  caret-color: brown;
+  border-bottom: 1px solid var(--border-color);
+  caret-color: var(--accent-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .filter-languages::placeholder {
-  color:rgb(193, 179, 179);
+  color: var(--text-secondary);
 }
 
 .filter-languages:focus {
@@ -174,12 +196,12 @@ button:focus {
 }
 
 .languages-list span {
-  color:#999;
+  color: var(--text-secondary);
   font-size: 13px;
 }
 
 .languages-list .active span {
-  color:#333;
+  color: var(--text-primary);
 }
 
 .languages-list .language {
@@ -187,30 +209,52 @@ button:focus {
 }
 
 .languages-list .language:hover span {
-  color: #333;
+  color: var(--text-primary);
 }
+
+/* Theme toggle button styles */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: 10px;
+  border-radius: 50%;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-bg);
+}
+
+.theme-toggle.dark {
+  color: var(--accent-color);
+}
+
 
 .languages-list .active {
   border: 0;
-  background-color: #ffe9e9 !important;
+  background-color: var(--active-bg) !important;
 }
 
 .languages-list .language:hover {
-  background-color: #f2f2f2;
+  background-color: var(--hover-bg);
 }
 
 .text-areas {
   display: flex;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
   border-radius: 8px;
+  border: 1px solid var(--border-color);
 }
 
 .translation, .input-area, .translation-area {
   width: 50%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border-bottom-right-radius: 8px;
-  border-top-right-radius: 8px;
+  border-radius: 8px;
+
+  background-color: var(--bg-secondary);
 }
 
 .input-area {
@@ -231,12 +275,8 @@ button:focus {
   color: brown;
 }
 
-.translation {
-  background-color: #f2f2f2;
-}
-
 .variant {
-  border-bottom: #ddd 1px solid;
+  border-bottom: var(--border-color) 1px solid;
   padding: 0px;
   padding-left: 10px;
   padding-right: 10px;
@@ -248,7 +288,7 @@ button:focus {
 }
 
 .variant:hover {
-  background-color: #ffd2d2;
+  background-color: var(--active-bg);
 }
 
 .source-text-overlay {
@@ -277,7 +317,7 @@ textarea:focus {
 }
 
 .source-sentence.highlighted {
-  background-color: #ffd2d2;
+  background-color: var(--active-bg);
 }
 
 .translated-sentence {
@@ -288,7 +328,7 @@ textarea:focus {
 }
 
 .translated-sentence:hover, .show-variants {
-  background-color: #ffd2d2;
+  background-color: var(--active-bg);
 }
 
 .translation-variants {
@@ -297,12 +337,29 @@ textarea:focus {
   width: max-content;
   display: flex;
   flex-wrap: wrap;
-  background-color: #fff;
+  background-color: var(--bg-secondary);
   flex-direction: column;
   border-radius: 4px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 3;
+}
+
+.variant {
+  border-bottom: 1px solid var(--border-color);
+  padding: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.variant:last-child {
+  border-bottom: none;
+}
+
+.variant:hover {
+  background-color: var(--active-bg);
 }
 
 button {
@@ -317,7 +374,7 @@ button {
 }
 
 button:hover {
-  color: #333;
+  color: var(--text-primary);
   box-shadow: none;
 }
 
@@ -371,7 +428,9 @@ button.clicked {
 }
 
 .translation-area {
-  background-color: #f2f2f2;
+  background-color: var(--bg-translation);
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 .text-areas {
@@ -397,7 +456,7 @@ body {
   position: relative;}
 
 .selected {
-  background-color: #ffe9e9;
+  background-color: var(--hover-bg);
 }
 
 [contenteditable]:empty:before {
@@ -432,7 +491,7 @@ body {
   }
 
   body {
-    background-color: #fff;
+    background-color: var(--bg-primary);
   }
 
   .translation-form {
@@ -440,6 +499,7 @@ body {
     padding: 0px;
     border-radius: 0px;
     box-shadow: none;
+    background-color: transparent;
   }
 
   .language-selectors {
@@ -449,8 +509,8 @@ body {
     margin-left: 10px;
     margin-right: 10px;
     justify-content: center;
-    border-bottom: 1px solid;
-    border-image: linear-gradient(to right, transparent 10%, #ddd 25%, #ddd 75%, transparent 90%) 100% 1;  
+    border-bottom: 1px solid var(--border-color);
+    border-image: linear-gradient(to right, transparent 10%, var(--border-color) 25%, var(--border-color) 75%, transparent 90%) 100% 1;  
     align-items: center;
   }
 
@@ -461,8 +521,8 @@ body {
     margin: 0px;
     flex-grow: 1;
     min-width: 0px;
-    color: #333;
-    background-color: #ffffff;
+    color: var(--text-primary);
+    background-color: transparent;
     border: none;
     padding-left: 20px;
     justify-items: start;
@@ -476,8 +536,8 @@ body {
 
   .language-selectors select:focus {
     outline: none;
-    background-color: #ffffff;
-    color: #333;
+    background-color: transparent;
+    color: var(--text-primary);
   }
 
   .text-areas {
@@ -497,11 +557,13 @@ body {
 
   .input-area {
     height: auto;
+    background-color: transparent;
   }
 
   .translation-area {
     height: auto;
-    border-bottom-left-radius: 30px; /* adjust as needed */
+    border-radius: 0px;
+    border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
   }
 
@@ -515,7 +577,10 @@ body {
 
   button, select {
     -webkit-tap-highlight-color: transparent;
-    color: #333;
+    color: var(--text-primary);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
   }
 
   button:hover {
@@ -551,7 +616,7 @@ body {
   }
 
   .locale-switcher:hover {
-    background-color: #ffffff;
+    background-color: var(--bg-primary);
   }
   
   .locale-switcher .active {
@@ -577,4 +642,7 @@ body {
     font-size: small;
   }
 
+}
+.dark-mode .locale-switcher .active {
+  opacity: 0.8;
 }
