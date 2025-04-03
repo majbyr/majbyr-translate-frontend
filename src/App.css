@@ -99,7 +99,7 @@ button:focus {
 
 .language-selector {
   flex: 1;
-  min-width: 0px;
+  min-width: 0;
 }
 
 .language-selectors .active {
@@ -122,7 +122,7 @@ button:focus {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  z-index: 1;
+  z-index: 4;
   padding: 0px;
   overflow: hidden;
   width: 50%;
@@ -206,7 +206,7 @@ button:focus {
   border-radius: 8px;
 }
 
-textarea, .translation, .input-area, .translation-area {
+.translation, .input-area, .translation-area {
   width: 50%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-bottom-right-radius: 8px;
@@ -251,8 +251,33 @@ textarea, .translation, .input-area, .translation-area {
   background-color: #ffd2d2;
 }
 
+.source-text-overlay {
+  position: absolute;
+  background-color: transparent;
+  font: inherit;
+  padding: 10px;
+  top: 0;
+  left: 0;
+  width: calc(100% - 20px);
+  height: 50%;
+  z-Index: 2;
+  resize: none;
+  white-Space: pre-wrap;
+  border: none;
+  caret-color: brown;
+  color: inherit;
+}
+
+.source-text-overlay::placeholder {
+  color: rgb(193, 179, 179);
+}
+
 textarea:focus {
   outline: none;
+}
+
+.source-sentence.highlighted {
+  background-color: #ffd2d2;
 }
 
 .translated-sentence {
@@ -277,7 +302,7 @@ textarea:focus {
   border-radius: 4px;
   border: 1px solid #ddd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1;
+  z-index: 3;
 }
 
 button {
@@ -287,8 +312,8 @@ button {
   border: none;
   cursor: pointer;
   font-size: 15px;
-  transition: background-color 0.3s;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
 }
 
 button:hover {
@@ -299,6 +324,10 @@ button:hover {
 button:disabled {
   color: transparent;
   cursor: default;
+}
+
+.clear-button {
+  display: none;
 }
 
 .translation-result p {
@@ -314,7 +343,10 @@ button:disabled {
   resize: none;
   padding: 10px;
   text-align: left;
-  caret-color: brown;
+}
+
+.source-text {
+  color: transparent;
 }
 
 .source-text:focus {
@@ -328,7 +360,7 @@ button:disabled {
   padding: 5px;
 }
 
-.tools-area button, .revert-languages-button, .more-button {
+.tools-area button, .revert-languages-button, .more-button, .clear-button {
   border-radius: 30px;
 }
 
@@ -368,7 +400,7 @@ body {
   background-color: #ffe9e9;
 }
 
-[contenteditable]:empty:before{
+[contenteditable]:empty:before {
   content:attr(placeholder);
   color:rgb(193, 179, 179);
 }
@@ -424,8 +456,7 @@ body {
 
   .language-selectors select {
     display: block;
-    align-self: center;
-    font-size: large;   
+    align-self: center; 
     padding: 0px; 
     margin: 0px;
     flex-grow: 1;
@@ -436,6 +467,7 @@ body {
     padding-left: 20px;
     justify-items: start;
     width: 100%;
+    font-size: medium;
   }
 
   .language-selectors .recent-languages {
@@ -496,10 +528,16 @@ body {
     transition: transform 0.1s ease, background-color 0.2s ease;
   }
 
+  .clear-button {
+    display: block;
+    padding: 10px;
+    font-size: large;
+  }
+
   .locale-switcher {
     position: absolute;
     flex-direction: column;
-    z-index: 1;
+    z-index: 4;
     padding: 10px;
   }
   

@@ -32,7 +32,6 @@ function LanguageSelector({
   const [recentTargetLanguages, setRecentTargetLanguages] = useRecentLanguages("recentTargetLanguages", selectedLang);
   const languagesListRef = useRef(null);
   const [isMoreButtonClicked, setIsMoreButtonClicked] = useState(false);
-  const [isLangusageButtonClicked, setIsLangusageButtonClicked] = useState(false);
   const [clickedLanguage, setClickedLanguage] = useState(null);
 
   useEffect(() => {
@@ -97,8 +96,8 @@ function LanguageSelector({
             className={`language ${selectedLang === lang ? "active" : ""} ${clickedLanguage === lang ? "clicked" : ""}`}
             onClick={() => {
               onLanguageSelect(lang);
-              setClickedLanguage(lang); // Set the clicked language
-              setTimeout(() => setClickedLanguage(null), 200); // Reset after 200ms
+              setClickedLanguage(lang);
+              setTimeout(() => setClickedLanguage(null), 200); 
             }}
           >
             {t(lang)}

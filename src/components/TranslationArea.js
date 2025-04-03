@@ -44,6 +44,8 @@ function TranslationArea({
               <SentenceElement
                 variants={translationVariants}
                 key={sentenceIndex}
+                paraIndex={paragraphIndex}
+                sentIndex={sentenceIndex}
                 onVariantChange={(newVariant) =>
                   handleVariantChange(paragraphIndex, sentenceIndex, newVariant)
                 }
