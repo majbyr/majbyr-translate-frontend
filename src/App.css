@@ -28,14 +28,24 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow-x: hidden;
+}
+
+html {
+  background-color: var(--bg-primary);
+  height: -webkit-fill-available;
 }
 
 .app {
   text-align: center;
-  padding: 20px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow-x: hidden;
+  padding: 0px 20px 0px 20px;
 }
 
 .app-header{
