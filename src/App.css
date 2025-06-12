@@ -44,8 +44,8 @@ html {
   color: var(--text-primary);
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  overflow-x: hidden;
-  padding: 0px 20px 0px 20px;
+  overflow: visible;
+  padding: 0px 20px;
 }
 
 .app-header{
