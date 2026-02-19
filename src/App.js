@@ -82,7 +82,7 @@ function AppContent() {
 
     try {
       const response = await fetch(
-        "https://api.majbyr.com/translate_by_sentences/",
+        (process.env.REACT_APP_API_URL || "/api") + "/translate_by_sentences/",
         {
           method: "POST",
           headers: {
@@ -116,7 +116,7 @@ function AppContent() {
     }
     try {
       // Construct the URL with query parameters
-      const url = new URL("https://api.majbyr.com/tts/");
+      const url = new URL((process.env.REACT_APP_API_URL || "/api") + "/tts/");
       url.searchParams.append("text", text);
       url.searchParams.append("lang", lang);
       setIsAudioPlaying(true);
@@ -148,7 +148,7 @@ function AppContent() {
   const getTranslationLanguages = async () => {
     try {
       const response = await fetch(
-        "https://api.majbyr.com/translation_languages/"
+        (process.env.REACT_APP_API_URL || "/api") + "/translation_languages/"
       );
       const data = await response.json();
       setLanguages(data.languages);
@@ -160,7 +160,7 @@ function AppContent() {
   const getTtsLanguages = async () => {
     try {
       const response = await fetch(
-        "https://api.majbyr.com/tts_languages/"
+        (process.env.REACT_APP_API_URL || "/api") + "/tts_languages/"
       );
       const data = await response.json();
       setTtsLanguages(data.languages);
