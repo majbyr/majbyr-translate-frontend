@@ -115,12 +115,12 @@ function AppContent() {
       return;
     }
     try {
-      // Construct the URL with query parameters
-      const url = new URL((process.env.REACT_APP_API_URL || "/api") + "/tts/");
-      url.searchParams.append("text", text);
-      url.searchParams.append("lang", lang);
       setIsAudioPlaying(true);
-      const response = await fetch(url);
+      const response = await fetch((process.env.REACT_APP_API_URL || "/api") + "/tts/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, lang }),
+      });
       if (!response.ok) {
         setIsAudioPlaying(false);
         throw new Error("Response from TTS service was not okay");
