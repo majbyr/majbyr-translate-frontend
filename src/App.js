@@ -14,6 +14,8 @@ import "./App.css";
 import "./i18n";
 import { useTranslation } from "react-i18next";
 import { updateHreflangTags }  from './utils/updateHreflangTags';
+import { analyticsFetch } from './analytics';
+import AnalyticsConsent from './components/AnalyticsConsent';
 
 function AppContent() {
   const { t } = useTranslation();
@@ -81,7 +83,7 @@ function AppContent() {
     abortControllerRef.current = abortController;
 
     try {
-      const response = await fetch(
+      const response = await analyticsFetch(
         (process.env.REACT_APP_API_URL || "/api") + "/translate_by_sentences/",
         {
           method: "POST",
@@ -116,7 +118,7 @@ function AppContent() {
     }
     try {
       setIsAudioPlaying(true);
-      const response = await fetch((process.env.REACT_APP_API_URL || "/api") + "/tts/", {
+      const response = await analyticsFetch((process.env.REACT_APP_API_URL || "/api") + "/tts/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text, lang }),
@@ -147,7 +149,7 @@ function AppContent() {
   // get translation languages from api
   const getTranslationLanguages = async () => {
     try {
-      const response = await fetch(
+      const response = await analyticsFetch(
         (process.env.REACT_APP_API_URL || "/api") + "/translation_languages/"
       );
       const data = await response.json();
@@ -159,7 +161,7 @@ function AppContent() {
 
   const getTtsLanguages = async () => {
     try {
-      const response = await fetch(
+      const response = await analyticsFetch(
         (process.env.REACT_APP_API_URL || "/api") + "/tts_languages/"
       );
       const data = await response.json();
@@ -176,6 +178,7 @@ function AppContent() {
   return (
     <Router>
       <div className="app">
+        <AnalyticsConsent />
         <StructuredData t={t} />
         <header className="app-header">
           <img src={logo} className="app-logo" alt="logo" />
