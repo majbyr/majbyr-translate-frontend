@@ -1,9 +1,8 @@
-FROM node:alpine AS builder
+FROM node:22-alpine@sha256:16e22a550f3863206a3f701448c45f7912c6896a62de43add43bb9c86130c3e2 AS builder
 
-RUN adduser -D -g '' www
 WORKDIR /app
-COPY package.json .
-RUN npm install
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
 
 ARG REACT_APP_API_URL=""
@@ -11,8 +10,9 @@ ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 
 RUN npm run build
 
-FROM bitnami/nginx:latest
-COPY --from=builder /app/build /app
-COPY default.conf /opt/bitnami/nginx/conf/server_blocks/
+FROM nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236
+ENV API_PROXY_TARGET=https://api.majbyr.com
+COPY --from=builder /app/build /usr/share/nginx/html
+COPY default.conf /etc/nginx/templates/default.conf.template
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]

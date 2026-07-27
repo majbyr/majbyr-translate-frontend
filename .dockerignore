@@ -1,0 +1,9 @@
+.git
+.github
+.env
+.env.*
+node_modules
+build
+coverage
+npm-debug.log*
+*.md
