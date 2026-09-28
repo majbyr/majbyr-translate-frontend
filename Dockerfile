@@ -10,7 +10,7 @@ ENV REACT_APP_API_URL=${REACT_APP_API_URL}
 
 RUN npm run build
 
-FROM nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236
+FROM nginx:1.29-alpine@sha256:5616878291a2eed594aee8db4dade5878cf7edcb475e59193904b198d9b830de
 ENV API_PROXY_TARGET=https://api.majbyr.com
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY default.conf /etc/nginx/templates/default.conf.template
